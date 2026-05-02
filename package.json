@@ -2,7 +2,7 @@
   "name": "warhammer-40k-theme",
   "displayName": "Warhammer 40k: Grimdark Elite",
   "description": "Premium dark themes inspired by Blood Angels and Deathwatch. Cathedral starship aesthetics for the discerning developer.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
@@ -34,6 +34,15 @@
   "main": "./out/extension.js",
   "activationEvents": [],
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "warhammer.mascotView",
+          "name": "Servo-Skull"
+        }
+      ]
+    },
     "themes": [
       {
         "label": "Blood Angels",
@@ -56,6 +65,11 @@
         "command": "warhammer.companionSpeak",
         "title": "Warhammer 40k: Consult the Servo-Skull",
         "category": "Warhammer 40k"
+      },
+      {
+        "command": "warhammer.summonMascot",
+        "title": "Warhammer 40k: Summon the Servo-Skull",
+        "category": "Warhammer 40k"
       }
     ],
     "configuration": {
@@ -75,6 +89,47 @@
           "type": "boolean",
           "default": true,
           "description": "Allow the Servo-Skull to react when you save files (10% chance)."
+        },
+        "warhammer.mascot.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the floating Servo-Skull mascot companion."
+        },
+        "warhammer.mascot.faction": {
+          "type": "string",
+          "default": "auto",
+          "enum": ["auto", "bloodAngels", "deathwatch"],
+          "enumDescriptions": [
+            "Detect faction from the active color theme.",
+            "Blood Angels — noble, crimson authority.",
+            "Deathwatch — tactical, dark military precision."
+          ],
+          "description": "Faction voice for the mascot companion. 'auto' inherits from the active theme."
+        },
+        "warhammer.mascot.displayDuration": {
+          "type": "number",
+          "default": 8,
+          "minimum": 3,
+          "maximum": 30,
+          "description": "How long (seconds) the Servo-Skull remains visible before fading out."
+        },
+        "warhammer.mascot.ambientFrequency": {
+          "type": "string",
+          "default": "rare",
+          "enum": ["off", "rare", "occasional"],
+          "enumDescriptions": [
+            "No ambient appearances.",
+            "Appears roughly once every 90–130 minutes.",
+            "Appears roughly once every 45–75 minutes."
+          ],
+          "description": "How often the Servo-Skull makes unprompted ambient appearances."
+        },
+        "warhammer.mascot.longSessionThreshold": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 8,
+          "description": "Hours of continuous editing before the long-session message is shown (once per session)."
         }
       }
     }

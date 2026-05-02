@@ -6,6 +6,35 @@ A premium VS Code theme collection inspired by the Blood Angels and Deathwatch c
 
 ---
 
+## Installation
+
+### From VSIX (local build)
+
+**Requirements:** Node.js 18+, VS Code 1.85+
+
+```bash
+# 1. Install dependencies and package the extension
+npm install
+npm run package
+
+# 2. Install into VS Code
+code --install-extension warhammer-40k-theme-0.2.0.vsix
+```
+
+Or install via the VS Code UI:
+
+1. Open VS Code
+2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
+3. Run **Extensions: Install from VSIX...**
+4. Select `warhammer-40k-theme-0.2.0.vsix`
+5. Reload VS Code when prompted
+
+### Apply the theme
+
+`Cmd+Shift+P` → **Preferences: Color Theme** → select **Blood Angels** or **Deathwatch**
+
+---
+
 ## Themes
 
 ### Blood Angels
@@ -36,44 +65,58 @@ The crimson in Blood Angels is used only for active states, errors, and critical
 
 ## Servo-Skull Companion
 
-An optional ambient companion that manifests in your status bar.
+### Status Bar Presence
 
-**Features:**
-- Rotating status bar presence with Imperial transmissions
-- Occasional flavor messages (40–60 minute intervals, disabled by default in focus mode)
-- Rare reactions when you save files (8% chance)
-- Fully configurable — disable any aspect independently
+An ambient companion that manifests in your status bar with rotating Imperial status labels and occasional flavor transmissions.
+
+- Rotating labels every 5 minutes
+- Transmissions delivered every 40–60 minutes
+- Rare reactions on file save (8% chance)
+
+### Mascot Companion
+
+A floating Servo-Skull that appears beside your editor during key IDE moments. It never steals focus, never blocks your code, and fades away on its own.
+
+**Triggers:**
+
+| Moment | Example message |
+|---|---|
+| Project open | *"Litany of Awakening complete."* |
+| Successful build/task | *"Machine Spirit appeased."* |
+| Failed build/task | *"Tech-Heresy detected. Purge and recommit."* |
+| Git commit | *"The Codex records your actions."* |
+| Long coding session | *"Even in death, code still serves."* |
+| Ambient | *"Faith is compiled in silence."* |
+
+Messages differ between Blood Angels and Deathwatch factions. Faction is auto-detected from your active color theme, or set manually in settings.
 
 **Commands:**
-- `Warhammer 40k: Toggle Servo-Skull Companion` — activate or dismiss
-- `Warhammer 40k: Consult the Servo-Skull` — request an immediate transmission
+
+| Command | Description |
+|---|---|
+| `Warhammer 40k: Toggle Servo-Skull Companion` | Enable or disable the status bar companion |
+| `Warhammer 40k: Consult the Servo-Skull` | Request an immediate status bar transmission |
+| `Warhammer 40k: Summon the Servo-Skull` | Trigger an immediate mascot appearance |
+| `Warhammer 40k: Dismiss the Servo-Skull` | Close the mascot panel immediately |
 
 **Settings:**
+
 ```json
 {
   "warhammer.companion.enabled": true,
   "warhammer.companion.notificationsEnabled": true,
-  "warhammer.companion.saveReactions": true
+  "warhammer.companion.saveReactions": true,
+
+  "warhammer.mascot.enabled": true,
+  "warhammer.mascot.faction": "auto",
+  "warhammer.mascot.displayDuration": 8,
+  "warhammer.mascot.ambientFrequency": "rare",
+  "warhammer.mascot.longSessionThreshold": 2
 }
 ```
 
----
-
-## Installation
-
-**Via VS Code Marketplace:**
-Search for "Warhammer 40k Grimdark Elite" and install.
-
-**Via VSIX (local):**
-```bash
-npm install
-npm run compile
-npx vsce package
-code --install-extension warhammer-40k-theme-0.1.0.vsix
-```
-
-**Apply the theme:**
-`Ctrl+Shift+P` → `Preferences: Color Theme` → select **Blood Angels** or **Deathwatch**
+`faction` accepts `"auto"` (inherits from active theme), `"bloodAngels"`, or `"deathwatch"`.  
+`ambientFrequency` accepts `"off"`, `"rare"` (every 90–130 min), or `"occasional"` (every 45–75 min).
 
 ---
 
@@ -127,7 +170,7 @@ Enable semantic highlighting for the best experience:
 ## Roadmap
 
 - [ ] Icon theme with Imperial sigils for common file types
-- [ ] Animated servo-skull webview panel (sidebar companion)
+- [x] Animated servo-skull webview companion
 - [ ] Chapter selector: Ultramarines, Space Wolves, Dark Angels variants
 - [ ] Sound pack: cogitator hum, servo-skull chirps (opt-in)
 - [ ] Purity seal notifications for milestone commits
