@@ -1,0 +1,94 @@
+{
+  "name": "warhammer-40k-theme",
+  "displayName": "Warhammer 40k: Grimdark Elite",
+  "description": "Premium dark themes inspired by Blood Angels and Deathwatch. Cathedral starship aesthetics for the discerning developer.",
+  "version": "0.1.0",
+  "publisher": "warhammer-theme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "warhammer",
+    "grimdark",
+    "blood angels",
+    "deathwatch",
+    "premium",
+    "elegant"
+  ],
+  "galleryBanner": {
+    "color": "#0D0D0F",
+    "theme": "dark"
+  },
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warhammer-theme/vscode"
+  },
+  "license": "MIT",
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Blood Angels",
+        "uiTheme": "vs-dark",
+        "path": "./themes/blood-angels-color-theme.json"
+      },
+      {
+        "label": "Deathwatch",
+        "uiTheme": "vs-dark",
+        "path": "./themes/deathwatch-color-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "warhammer.toggleCompanion",
+        "title": "Warhammer 40k: Toggle Servo-Skull Companion",
+        "category": "Warhammer 40k"
+      },
+      {
+        "command": "warhammer.companionSpeak",
+        "title": "Warhammer 40k: Consult the Servo-Skull",
+        "category": "Warhammer 40k"
+      }
+    ],
+    "configuration": {
+      "title": "Warhammer 40k Theme",
+      "properties": {
+        "warhammer.companion.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Servo-Skull companion in the status bar."
+        },
+        "warhammer.companion.notificationsEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow the Servo-Skull to occasionally deliver transmissions."
+        },
+        "warhammer.companion.saveReactions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow the Servo-Skull to react when you save files (10% chance)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
