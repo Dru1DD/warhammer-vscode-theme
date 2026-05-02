@@ -3,7 +3,7 @@
   "displayName": "Warhammer 40k: Grimdark Elite",
   "description": "Premium dark themes inspired by Blood Angels and Deathwatch. Cathedral starship aesthetics for the discerning developer.",
   "version": "0.1.0",
-  "publisher": "warhammer-theme",
+  "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -28,7 +28,7 @@
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/warhammer-theme/vscode"
+    "url": "https://github.com/Dru1DD/warhammer-vscode-theme"
   },
   "license": "MIT",
   "main": "./out/extension.js",
