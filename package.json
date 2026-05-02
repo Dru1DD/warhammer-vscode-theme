@@ -2,7 +2,7 @@
   "name": "warhammer-40k-theme",
   "displayName": "Warhammer 40k: Grimdark Elite",
   "description": "Premium dark themes inspired by Blood Angels and Deathwatch. Cathedral starship aesthetics for the discerning developer.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
@@ -53,6 +53,26 @@
         "label": "Deathwatch",
         "uiTheme": "vs-dark",
         "path": "./themes/deathwatch-color-theme.json"
+      },
+      {
+        "label": "Necrons",
+        "uiTheme": "vs-dark",
+        "path": "./themes/necrons-color-theme.json"
+      },
+      {
+        "label": "Ultramarines",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ultramarines-color-theme.json"
+      },
+      {
+        "label": "Adeptus Mechanicus",
+        "uiTheme": "vs-dark",
+        "path": "./themes/adeptus-mechanicus-color-theme.json"
+      },
+      {
+        "label": "Death Guard",
+        "uiTheme": "vs-dark",
+        "path": "./themes/death-guard-color-theme.json"
       }
     ],
     "commands": [

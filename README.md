@@ -2,7 +2,7 @@
 
 > *"In the grim darkness of the far future, there is only code."*
 
-A premium VS Code theme collection inspired by the Blood Angels and Deathwatch chapters. Designed for developers who want **elegant**, **atmospheric**, and **genuinely comfortable** tooling — not a gamer aesthetic.
+A premium VS Code theme collection inspired by the factions of Warhammer 40k. Designed for developers who want **elegant**, **atmospheric**, and **genuinely comfortable** tooling — not a gamer aesthetic.
 
 ---
 
@@ -18,7 +18,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.2.0.vsix
+code --install-extension warhammer-40k-theme-0.3.0.vsix
 ```
 
 Or install via the VS Code UI:
@@ -26,12 +26,12 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.2.0.vsix`
+4. Select `warhammer-40k-theme-0.3.0.vsix`
 5. Reload VS Code when prompted
 
-### Apply the theme
+### Apply a theme
 
-`Cmd+Shift+P` → **Preferences: Color Theme** → select **Blood Angels** or **Deathwatch**
+`Cmd+Shift+P` → **Preferences: Color Theme** → select your faction
 
 ---
 
@@ -39,7 +39,7 @@ Or install via the VS Code UI:
 
 ### Blood Angels
 
-Noble crimson elite aesthetic. Deep charcoal base with restrained crimson accents and relic gold syntax highlighting. The red is rare. When it appears, it means something.
+Noble crimson elite aesthetic. Deep charcoal base with restrained crimson accents and relic gold function highlights. The red is rare — when it appears, it means something.
 
 **Palette feel:** Cathedral starship. Command deck of a strike cruiser.
 
@@ -49,57 +49,117 @@ Tactical black-silver aesthetic. Near-pure obsidian base with cool steel-grey to
 
 **Palette feel:** Kill-team insertion point. Void-black armor. One silver arm.
 
+### Necrons
+
+Cold metallic greens on obsidian black. Minimal syntax noise. "Digital tomb" aesthetic — structured, ancient, inevitable.
+
+**Palette feel:** Necrodermis awakening. A tomb world processing its first command in sixty million years.
+
+| Role | Color |
+|---|---|
+| Keywords | Spectral green |
+| Functions | Necrodermis teal |
+| Types | Void teal |
+| Strings | Muted cold-green |
+
+### Ultramarines
+
+Imperial blue and gold on dark navy. Highly readable. Structured like a tactical display.
+
+**Palette feel:** Fortress Monastery command room. Codex Astartes printed in gilt on vellum.
+
+| Role | Color |
+|---|---|
+| Keywords | Imperial blue |
+| Functions | Imperial gold |
+| Types | Steel blue |
+| Strings | Parchment |
+
+### Adeptus Mechanicus
+
+Dark industrial red-brown with brass and amber. Techno-religious. Terminal-precise.
+
+**Palette feel:** Forge World cogitator array. The Omnissiah's logic engines processing litanies.
+
+| Role | Color |
+|---|---|
+| Keywords | Amber-brass |
+| Functions | Bright brass |
+| Types | Copper |
+| Strings | Warm amber inscription |
+
+### Death Guard
+
+Murky organic greens and bone yellows. Heavy contrast. Slow, inevitable palette.
+
+**Palette feel:** Plague hulk drifting through the warp. Decay as permanence.
+
+| Role | Color |
+|---|---|
+| Keywords | Plague green |
+| Functions | Bone yellow |
+| Types | Murky grey-green |
+| Strings | Dirty amber |
+
 ---
 
 ## Design Philosophy
 
-This theme is built around three constraints:
+All six themes are built around three constraints:
 
 1. **Clarity first** — readable at 6+ hours of daily use without eye strain
 2. **Restraint** — Warhammer influence is atmospheric, not decorative
 3. **Premium feel** — closer to Cursor or Linear's visual design than a gaming overlay
 
-The crimson in Blood Angels is used only for active states, errors, and critical accents. The syntax hierarchy is clear: functions are gold, keywords are steel-blue, strings are warm parchment, types are soft lilac-silver.
+Faction identity lives in the syntax hierarchy and active UI states. The background is always near-black with only a faction-tinted hint. Faction color appears on functions (most prominent), keywords (structural), and accent elements — not saturated across the whole surface.
 
 ---
 
 ## Servo-Skull Companion
 
+### Explorer Sidebar
+
+The Servo-Skull mascot lives permanently in your **Explorer sidebar**. Open the Explorer panel and look for the **Servo-Skull** section.
+
+The view shows:
+- The Servo-Skull mascot with a continuous floating animation and pulsing glow ring
+- A Warhammer-style dark background with faction tint, diagonal texture, and gothic corner ornaments
+- A message area that updates in-place when events fire, with smooth cross-fade transitions
+- An event badge showing what triggered each transmission
+- A cycling status line at the bottom
+
 ### Status Bar Presence
 
-An ambient companion that manifests in your status bar with rotating Imperial status labels and occasional flavor transmissions.
+An ambient companion in your status bar with rotating Imperial status labels and occasional flavor transmissions.
 
 - Rotating labels every 5 minutes
 - Transmissions delivered every 40–60 minutes
 - Rare reactions on file save (8% chance)
 
-### Mascot Companion
+### Trigger Events
 
-A floating Servo-Skull that appears beside your editor during key IDE moments. It never steals focus, never blocks your code, and fades away on its own.
+Messages update in the sidebar view automatically when these events fire:
 
-**Triggers:**
+| Event | Blood Angels | Deathwatch |
+|---|---|---|
+| Project open | *"Litany of Awakening complete."* | *"Watch Station active. Standing by."* |
+| Successful task | *"Machine Spirit appeased."* | *"Target eliminated. Move to the next."* |
+| Failed task | *"Tech-Heresy detected. Purge and recommit."* | *"Abort. Purge. Recommit."* |
+| Git commit | *"A purity seal has been applied."* | *"Intel logged. The Watch remembers."* |
+| Long session | *"Even in death, code still serves."* | *"Vigilance is the price of deployment."* |
+| Ambient | *"Faith is compiled in silence."* | *"The Watch endures."* |
 
-| Moment | Example message |
-|---|---|
-| Project open | *"Litany of Awakening complete."* |
-| Successful build/task | *"Machine Spirit appeased."* |
-| Failed build/task | *"Tech-Heresy detected. Purge and recommit."* |
-| Git commit | *"The Codex records your actions."* |
-| Long coding session | *"Even in death, code still serves."* |
-| Ambient | *"Faith is compiled in silence."* |
+Faction is auto-detected from your active color theme, or set manually in settings.
 
-Messages differ between Blood Angels and Deathwatch factions. Faction is auto-detected from your active color theme, or set manually in settings.
-
-**Commands:**
+### Commands
 
 | Command | Description |
 |---|---|
 | `Warhammer 40k: Toggle Servo-Skull Companion` | Enable or disable the status bar companion |
 | `Warhammer 40k: Consult the Servo-Skull` | Request an immediate status bar transmission |
-| `Warhammer 40k: Summon the Servo-Skull` | Trigger an immediate mascot appearance |
-| `Warhammer 40k: Dismiss the Servo-Skull` | Close the mascot panel immediately |
+| `Warhammer 40k: Summon the Servo-Skull` | Trigger an ambient transmission in the sidebar |
 
-**Settings:**
+### Settings
 
 ```json
 {
@@ -170,10 +230,11 @@ Enable semantic highlighting for the best experience:
 ## Roadmap
 
 - [ ] Icon theme with Imperial sigils for common file types
-- [x] Animated servo-skull webview companion
-- [ ] Chapter selector: Ultramarines, Space Wolves, Dark Angels variants
+- [x] Animated servo-skull sidebar companion
+- [x] Chapter selector: Necrons, Ultramarines, Adeptus Mechanicus, Death Guard
 - [ ] Sound pack: cogitator hum, servo-skull chirps (opt-in)
 - [ ] Purity seal notifications for milestone commits
+- [ ] Faction mascot variants per theme
 
 ---
 

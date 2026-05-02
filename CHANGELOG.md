@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.3.0
+
+### Added
+
+- **Four new faction themes** — premium dark themes designed for long coding sessions, each with a distinct Warhammer 40k identity
+
+  - **Necrons** — obsidian blacks and necrodermis green. Minimal noise. "Digital tomb" aesthetic. Functions glow cold teal-green; keywords are restrained spectral green. Feels engraved into ancient metal.
+
+  - **Ultramarines** — dark navy base with imperial blue keywords and imperial gold functions. The gold is used sparingly — only on callsites and headings, the way rank insignia appears on armor. Strings are warm parchment against the cool military blue.
+
+  - **Adeptus Mechanicus** — industrial dark red-brown base. Amber-brass for keywords, bright brass for functions, copper for types. Sacred red reserved for HTML tags and active UI borders — high ceremony, not everyday syntax. Feels like a cogitator terminal.
+
+  - **Death Guard** — murky organic dark with plague green keywords, bone-yellow functions, and murky grey-green types. Strings are dirty amber. Comments are barely legible at near-invisible `#28291E`. Heavy and unhurried.
+
+- **Servo-Skull Explorer view** — the mascot moves from the floating bottom panel to a **persistent sidebar view in the Explorer**. The Servo-Skull is now always visible; no longer a toast that appears and disappears.
+  - Mascot image rendered with a continuous float animation and pulsing radial glow ring
+  - Warhammer faction background: layered dark gradient, diagonal texture lines, and faction-colored top glow
+  - Gothic corner ornaments at all four edges
+  - Faction tag header (`BLOOD ANGELS` / `DEATHWATCH`) with gradient separator lines
+  - Message area with shimmer borders and cross-fade transitions on text update
+  - Event badge (`Mission Complete`, `Anomaly Detected`, `Codex Updated`, etc.) fades in on trigger events
+  - Blinking status dot with randomly cycling status lines
+  - On trigger events: message cross-fades in-place without disturbing editor focus
+  - After `displayDuration` seconds: smoothly returns to a rotating idle message
+
+### Changed
+
+- `Warhammer 40k: Dismiss the Servo-Skull` command removed — no longer applicable now that the mascot is a persistent sidebar view
+- Version bumped to `0.3.0`
+
+---
+
 ## 0.2.0
 
 ### Added
