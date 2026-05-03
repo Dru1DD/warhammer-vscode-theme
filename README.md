@@ -18,7 +18,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.3.0.vsix
+code --install-extension warhammer-40k-theme-0.4.0.vsix
 ```
 
 Or install via the VS Code UI:
@@ -26,7 +26,7 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.3.0.vsix`
+4. Select `warhammer-40k-theme-0.4.0.vsix`
 5. Reload VS Code when prompted
 
 ### Apply a theme
@@ -101,11 +101,63 @@ Murky organic greens and bone yellows. Heavy contrast. Slow, inevitable palette.
 | Types | Murky grey-green |
 | Strings | Dirty amber |
 
+### Salamanders
+
+Warm forest greens and forge amber on near-black. Mid-dark — brighter than the grimdark originals, designed for daytime use without sacrificing atmosphere.
+
+**Palette feel:** Nocturne forge. Vulkan's armoury. Fire-lit promethium vault.
+
+| Role | Color |
+|---|---|
+| Keywords | Forest green |
+| Functions | Forge amber |
+| Types | Muted grey-green |
+| Strings | Warm amber |
+
+### Imperial Fists
+
+Warm charcoal base with controlled tactical gold. Subdued and readable — the gold appears only where it earns its place.
+
+**Palette feel:** Phalanx command deck. Siege warfare conducted with perfect patience.
+
+| Role | Color |
+|---|---|
+| Keywords | Dull gold |
+| Functions | Tactical gold |
+| Types | Warm grey |
+| Strings | Aged parchment |
+
+### Craftworld Eldar
+
+Cool blue-grey base with pale silver-blue and soft violet. Refined, alien, impossibly precise. Every element feels considered.
+
+**Palette feel:** Craftworld wraithbone spire. An infinity circuit parsing ancient light.
+
+| Role | Color |
+|---|---|
+| Keywords | Muted blue |
+| Functions | Pale silver-blue |
+| Types | Soft violet |
+| Strings | Deep teal |
+
+### Tau Empire
+
+Dark blue-grey base with clean ice-blue function highlights and controlled steel accents. Modern, tactical, uncluttered.
+
+**Palette feel:** Kor'vattra command interface. The Greater Good rendered in pure signal.
+
+| Role | Color |
+|---|---|
+| Keywords | Steel blue |
+| Functions | Ice blue |
+| Types | Blue-grey |
+| Strings | Cool teal |
+
 ---
 
 ## Design Philosophy
 
-All six themes are built around three constraints:
+All ten themes are built around three constraints:
 
 1. **Clarity first** — readable at 6+ hours of daily use without eye strain
 2. **Restraint** — Warhammer influence is atmospheric, not decorative
@@ -231,7 +283,7 @@ Enable semantic highlighting for the best experience:
 
 - [ ] Icon theme with Imperial sigils for common file types
 - [x] Animated servo-skull sidebar companion
-- [x] Chapter selector: Necrons, Ultramarines, Adeptus Mechanicus, Death Guard
+- [x] Chapter selector: 10 factions — Blood Angels, Deathwatch, Necrons, Ultramarines, Adeptus Mechanicus, Death Guard, Salamanders, Imperial Fists, Craftworld Eldar, Tau Empire
 - [ ] Sound pack: cogitator hum, servo-skull chirps (opt-in)
 - [ ] Purity seal notifications for milestone commits
 - [ ] Faction mascot variants per theme

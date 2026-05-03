@@ -1,8 +1,8 @@
 {
   "name": "warhammer-40k-theme",
   "displayName": "Warhammer 40k: Grimdark Elite",
-  "description": "Premium dark themes inspired by Blood Angels and Deathwatch. Cathedral starship aesthetics for the discerning developer.",
-  "version": "0.3.0",
+  "description": "Premium faction themes for Warhammer 40k devotees. Ten carefully crafted dark and mid-dark environments for long coding sessions.",
+  "version": "0.4.0",
   "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
@@ -18,6 +18,10 @@
     "grimdark",
     "blood angels",
     "deathwatch",
+    "salamanders",
+    "imperial fists",
+    "eldar",
+    "tau",
     "premium",
     "elegant"
   ],
@@ -73,6 +77,26 @@
         "label": "Death Guard",
         "uiTheme": "vs-dark",
         "path": "./themes/death-guard-color-theme.json"
+      },
+      {
+        "label": "Salamanders",
+        "uiTheme": "vs-dark",
+        "path": "./themes/salamanders-color-theme.json"
+      },
+      {
+        "label": "Imperial Fists",
+        "uiTheme": "vs-dark",
+        "path": "./themes/imperial-fists-color-theme.json"
+      },
+      {
+        "label": "Craftworld Eldar",
+        "uiTheme": "vs-dark",
+        "path": "./themes/craftworld-eldar-color-theme.json"
+      },
+      {
+        "label": "Tau Empire",
+        "uiTheme": "vs-dark",
+        "path": "./themes/tau-empire-color-theme.json"
       }
     ],
     "commands": [
