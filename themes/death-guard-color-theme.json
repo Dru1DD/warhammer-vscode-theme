@@ -461,7 +461,7 @@
     {
       "name": "Comments",
       "scope": ["comment", "punctuation.definition.comment", "string.comment"],
-      "settings": { "foreground": "#28291E", "fontStyle": "italic" }
+      "settings": { "foreground": "#6A6A52", "fontStyle": "italic" }
     },
     {
       "name": "Strings",
@@ -749,7 +749,7 @@
     "struct": "#707860",
     "decorator": "#606028",
     "macro": "#888038",
-    "comment": { "foreground": "#28291E", "italic": true },
+    "comment": { "foreground": "#6A6A52", "italic": true },
     "string": "#807840",
     "number": "#888038",
     "regexp": "#686030",

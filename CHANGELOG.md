@@ -1,5 +1,56 @@
 # Changelog
 
+## 0.5.0
+
+### Added
+
+- **Six new light / mid-light themes** — the first light-mode themes in the collection, each built for daytime coding without sacrificing faction identity
+
+  - **White Scars** — pale stone base with muted crimson and tactical grey. Swift, open, fierce. Comments render in warm stone; no visual noise.
+  - **Thousand Sons** — dusty blue-parchment base with arcane dusty blue keywords and turquoise functions. Scholarly melancholy. Feels like an illuminated manuscript running a compiler.
+  - **Sisters of Battle** — warm ivory base with cathedral crimson and relic gold. Devotional intensity kept legible. The gold earns every appearance.
+  - **Raven Guard** — fog-grey base with dark tactical slate and pale silver accents. Quiet, deliberate, shadow-precise.
+  - **Alpha Legion** — muted teal base with layered blue-grey contrast. Intentionally layered. Nothing is where it first appears.
+  - **Custodes** — pale warm marble base with restrained gold and imperial ivory. Measured. Authoritative. Built to last ten thousand years.
+
+- **Expanded mascot system** — the Servo-Skull now supports all 16 factions with distinct voice lines, palettes, and idle personality
+
+  - 16 selectable factions: `bloodAngels`, `deathwatch`, `necrons`, `ultramarines`, `mechanicus`, `deathGuard`, `salamanders`, `imperialFists`, `craftEldar`, `tau`, `whiteScars`, `thousandSons`, `sistersBattle`, `ravenGuard`, `alphaLegion`, `custodes`
+  - 7 trigger events per faction: `taskSuccess`, `taskFail`, `gitCommit`, `projectOpen`, `longSession`, `ambient`, `lateNight`
+  - New `lateNight` event fires automatically during midnight–5am ambient windows with faction-appropriate late-session lines
+  - Each faction has a unique visual palette (background tint, accent, glow color) in the sidebar mascot view
+  - `warhammer.mascot.faction` setting expanded with descriptions for all 16 factions
+
+- **Expanded status bar transmissions** — 24 total flavor lines (up from 10), covering code review, documentation, dependencies, and deep lore
+
+### Changed
+
+- Comment colors lifted for readability in four dark themes:
+  - **Deathwatch** — `#38383E` → `#6A6A7E` (steel-grey with blue undertone)
+  - **Necrons** — `#253025` → `#507060` (pale oxidized green-grey)
+  - **Adeptus Mechanicus** — `#3A2018` → `#7A5A40` (warm brass-grey)
+  - **Death Guard** — `#28291E` → `#6A6A52` (foggy bone-grey with olive tinge)
+  - All remain faction-accurate; contrast raised from near-invisible (~1.3:1) to readable (~3.5–4:1)
+
+---
+
+## 0.4.0
+
+### Added
+
+- **Four new mid-dark faction themes** — warmer and lighter than the original grimdark set, designed for day-shift coding
+
+  - **Salamanders** — warm forest green and forge amber on near-black. Fire-lit, grounded. Excellent daytime theme.
+  - **Imperial Fists** — warm charcoal with controlled tactical gold. Subdued, patient, siege-certain.
+  - **Craftworld Eldar** — cool blue-grey with pale silver-blue and soft violet. Refined alien OS aesthetic.
+  - **Tau Empire** — dark blue-grey with ice-blue function highlights. Clean, modern, uncluttered tactical display.
+
+### Changed
+
+- **Adeptus Mechanicus full usability overhaul** — critical contrast fixes applied across activity bar, status bar, icon colors, terminal ANSI palette, and git decorations. Several elements were near-invisible at previous values.
+
+---
+
 ## 0.3.0
 
 ### Added

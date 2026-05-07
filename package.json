@@ -1,8 +1,8 @@
 {
   "name": "warhammer-40k-theme",
   "displayName": "Warhammer 40k: Grimdark Elite",
-  "description": "Premium faction themes for Warhammer 40k devotees. Ten carefully crafted dark and mid-dark environments for long coding sessions.",
-  "version": "0.4.0",
+  "description": "Premium faction themes for Warhammer 40k devotees. Sixteen carefully crafted dark, mid-dark, and light environments for long coding sessions.",
+  "version": "0.5.0",
   "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
@@ -23,7 +23,14 @@
     "eldar",
     "tau",
     "premium",
-    "elegant"
+    "elegant",
+    "light theme",
+    "white scars",
+    "thousand sons",
+    "sisters of battle",
+    "raven guard",
+    "alpha legion",
+    "custodes"
   ],
   "galleryBanner": {
     "color": "#0D0D0F",
@@ -97,6 +104,36 @@
         "label": "Tau Empire",
         "uiTheme": "vs-dark",
         "path": "./themes/tau-empire-color-theme.json"
+      },
+      {
+        "label": "White Scars",
+        "uiTheme": "vs",
+        "path": "./themes/white-scars-color-theme.json"
+      },
+      {
+        "label": "Thousand Sons",
+        "uiTheme": "vs",
+        "path": "./themes/thousand-sons-color-theme.json"
+      },
+      {
+        "label": "Sisters of Battle",
+        "uiTheme": "vs",
+        "path": "./themes/sisters-of-battle-color-theme.json"
+      },
+      {
+        "label": "Raven Guard",
+        "uiTheme": "vs",
+        "path": "./themes/raven-guard-color-theme.json"
+      },
+      {
+        "label": "Alpha Legion",
+        "uiTheme": "vs",
+        "path": "./themes/alpha-legion-color-theme.json"
+      },
+      {
+        "label": "Custodes",
+        "uiTheme": "vs",
+        "path": "./themes/custodes-color-theme.json"
       }
     ],
     "commands": [
@@ -142,11 +179,43 @@
         "warhammer.mascot.faction": {
           "type": "string",
           "default": "auto",
-          "enum": ["auto", "bloodAngels", "deathwatch"],
+          "enum": [
+            "auto",
+            "bloodAngels",
+            "deathwatch",
+            "necrons",
+            "ultramarines",
+            "mechanicus",
+            "deathGuard",
+            "salamanders",
+            "imperialFists",
+            "craftEldar",
+            "tau",
+            "whiteScars",
+            "thousandSons",
+            "sistersBattle",
+            "ravenGuard",
+            "alphaLegion",
+            "custodes"
+          ],
           "enumDescriptions": [
             "Detect faction from the active color theme.",
-            "Blood Angels — noble, crimson authority.",
-            "Deathwatch — tactical, dark military precision."
+            "Blood Angels — noble, crimson authority. Duty and sacrifice.",
+            "Deathwatch — tactical, dark military precision. Stoic vigilance.",
+            "Necrons — ancient, detached machine consciousness. Dry cosmic contempt.",
+            "Ultramarines — confident, codex-adherent authority. By-the-book excellence.",
+            "Adeptus Mechanicus — reverent, ritualistic. Sacred machine communion.",
+            "Death Guard — weary, plague-touched endurance. Grinding persistence.",
+            "Salamanders — grounded, protective warmth. Forge-craft and kinship.",
+            "Imperial Fists — stoic, fortification-minded resolve. Unyielding walls.",
+            "Craftworld Eldar — elegant, melancholy foresight. Ancient and sorrowful.",
+            "Tau Empire — optimistic, utilitarian efficiency. The Greater Good.",
+            "White Scars — swift, fierce independence. Speed and open sky.",
+            "Thousand Sons — arcane, scholarly melancholy. Cursed knowledge.",
+            "Sisters of Battle — fierce devotional fire. Faith as weapon and shield.",
+            "Raven Guard — quiet, shadowed patience. Strike from silence.",
+            "Alpha Legion — layered, cryptic misdirection. Every plan has a plan.",
+            "Adeptus Custodes — measured imperial gravitas. Gold-clad certainty."
           ],
           "description": "Faction voice for the mascot companion. 'auto' inherits from the active theme."
         },

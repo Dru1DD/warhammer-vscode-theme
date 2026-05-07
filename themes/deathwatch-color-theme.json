@@ -466,7 +466,7 @@
         "string.comment"
       ],
       "settings": {
-        "foreground": "#38383E",
+        "foreground": "#6A6A7E",
         "fontStyle": "italic"
       }
     },
@@ -954,7 +954,7 @@
     "struct": "#787888",
     "decorator": "#706A40",
     "macro": "#7A6045",
-    "comment": { "foreground": "#38383E", "italic": true },
+    "comment": { "foreground": "#6A6A7E", "italic": true },
     "string": "#9A8B72",
     "number": "#7A6045",
     "regexp": "#806838",

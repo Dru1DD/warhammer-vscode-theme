@@ -12,6 +12,20 @@ const TRANSMISSIONS = [
   '"Another cycle complete. The Chapter\'s work is never finished." — Servo-Skull 7-Theta',
   '"Courage and honour, brother. Also, fix that TODO." — Servo-Skull 7-Theta',
   '"The warp takes many forms. Today it is a production bug." — Servo-Skull 7-Theta',
+  '"Refactor not from weakness, but from strength of purpose." — Servo-Skull 7-Theta',
+  '"A test that passes is a seal of purity. A test that fails is a heresy to be purged." — Servo-Skull 7-Theta',
+  '"Even the smallest commit is recorded in the annals of the Omnissiah." — Servo-Skull 7-Theta',
+  '"The Astronomican guides the lost. Your documentation guides your successors." — Servo-Skull 7-Theta',
+  '"Technical debt is the corruption of the machine spirit. Address it." — Servo-Skull 7-Theta',
+  '"Compliance is not optional. Neither are code reviews." — Servo-Skull 7-Theta',
+  '"That which can be automated shall be automated. So it is written." — Servo-Skull 7-Theta',
+  '"Your dependencies age. Update them, or face the consequences of entropy." — Servo-Skull 7-Theta',
+  '"A warrior who does not know the battlefield is already defeated. Read the codebase." — Servo-Skull 7-Theta',
+  '"The Greater Good is served by well-typed interfaces." — Servo-Skull 7-Theta',
+  '"Silence is not agreement. Write the comment." — Servo-Skull 7-Theta',
+  '"The Eldar see all possible futures. You need only handle the three likely ones." — Servo-Skull 7-Theta',
+  '"That error message was prophesied ten thousand cycles ago." — Servo-Skull 7-Theta',
+  '"Not every branch needs a name. Some are better left unmerged." — Servo-Skull 7-Theta',
 ];
 
 const STATUS_LABELS = [
@@ -182,7 +196,9 @@ export function activate(context: vscode.ExtensionContext) {
     const [minM, maxM] = freq === 'occasional' ? [45, 75] : [90, 130];
     const delayMs = (minM + Math.random() * (maxM - minM)) * 60 * 1000;
     setTimeout(() => {
-      mascot.show('ambient');
+      const hour = new Date().getHours();
+      const isLateNight = hour >= 0 && hour < 5;
+      mascot.show(isLateNight ? 'lateNight' : 'ambient');
       scheduleAmbientMascot();
     }, delayMs);
   }
