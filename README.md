@@ -20,7 +20,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.6.0.vsix
+code --install-extension warhammer-40k-theme-0.6.1.vsix
 ```
 
 Or install via the VS Code UI:
@@ -28,7 +28,7 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.6.0.vsix`
+4. Select `warhammer-40k-theme-0.6.1.vsix`
 5. Reload VS Code when prompted
 
 ### Apply a theme
