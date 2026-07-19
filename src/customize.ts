@@ -75,3 +75,103 @@ export function registerCustomizeThemeCommand(
     )
   );
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Per-key colour tuning — the Servo-Skull "rites plate".
+ *
+ * Overrides are written *theme-scoped* (`"[<Active Theme>]": { ... }`) so a
+ * tweak sticks to the theme it was made under and leaves every other faction
+ * untouched. Colours use `workbench.colorCustomizations`; `comments` and other
+ * syntax scopes use `editor.tokenColorCustomizations`.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+export type TargetKind = 'color' | 'token';
+
+export interface TunableTarget {
+  id: string;
+  label: string;
+  /** colorCustomizations key, or a tokenColorCustomizations scope name. */
+  key: string;
+  kind: TargetKind;
+  /** Optional alpha appended to the hex for `color` targets (e.g. selection). */
+  alpha?: string;
+  /** FactionPalette field used as the default swatch when nothing is set yet. */
+  paletteKey: string;
+}
+
+export const TUNABLE_TARGETS: readonly TunableTarget[] = [
+  { id: 'comments',  label: 'Comments',            key: 'comments',                          kind: 'token', paletteKey: 'goldDim' },
+  { id: 'cursor',    label: 'Cursor',              key: 'editorCursor.foreground',           kind: 'color', paletteKey: 'accent'  },
+  { id: 'lineNum',   label: 'Active Line Number',  key: 'editorLineNumber.activeForeground',  kind: 'color', paletteKey: 'gold'    },
+  { id: 'actIcon',   label: 'Activity Bar Icons',  key: 'activityBar.foreground',            kind: 'color', paletteKey: 'gold'    },
+  { id: 'statusBg',  label: 'Status Bar Background', key: 'statusBar.background',            kind: 'color', paletteKey: 'bgBase'  },
+  { id: 'selection', label: 'Selection',           key: 'selection.background',              kind: 'color', alpha: '55', paletteKey: 'accent' },
+];
+
+const SETTING_FOR: Record<TargetKind, string> = {
+  color: 'workbench.colorCustomizations',
+  token: 'editor.tokenColorCustomizations',
+};
+
+function activeThemeName(): string {
+  return (
+    vscode.workspace.getConfiguration('workbench').get<string>('colorTheme', '') ||
+    ''
+  );
+}
+
+/** Reads the current override for a target (theme-scoped first, then global). */
+export function readColorOverride(
+  key: string,
+  kind: TargetKind
+): string | undefined {
+  const root =
+    vscode.workspace
+      .getConfiguration()
+      .get<Record<string, unknown>>(SETTING_FOR[kind]) ?? {};
+  const theme = activeThemeName();
+  const scoped = theme
+    ? (root[`[${theme}]`] as Record<string, unknown> | undefined)
+    : undefined;
+  const value = scoped?.[key] ?? root[key];
+  return typeof value === 'string' ? value : undefined;
+}
+
+/**
+ * Pure merge: returns a new root with `key: value` set — theme-scoped under
+ * `[theme]` when a theme name is given, else at the top level. Existing
+ * siblings (other keys, other theme scopes) are preserved.
+ */
+export function mergeOverride(
+  root: Record<string, unknown>,
+  key: string,
+  value: string,
+  theme: string
+): Record<string, unknown> {
+  const next = { ...root };
+  if (theme) {
+    const scopeKey = `[${theme}]`;
+    next[scopeKey] = {
+      ...((next[scopeKey] as Record<string, unknown>) ?? {}),
+      [key]: value,
+    };
+  } else {
+    next[key] = value;
+  }
+  return next;
+}
+
+/** Writes a single theme-scoped colour/token override, preserving siblings. */
+export async function setColorOverride(
+  key: string,
+  hex: string,
+  kind: TargetKind,
+  alpha?: string
+): Promise<void> {
+  const config = vscode.workspace.getConfiguration();
+  const setting = SETTING_FOR[kind];
+  const root = config.get<Record<string, unknown>>(setting) ?? {};
+  const value = kind === 'color' ? hex + (alpha ?? '') : hex;
+  const merged = mergeOverride(root, key, value, activeThemeName());
+  await config.update(setting, merged, vscode.ConfigurationTarget.Global);
+}

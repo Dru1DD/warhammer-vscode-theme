@@ -10,3 +10,4 @@ scripts/**
 node_modules/**
 tsconfig.json
 webpack.config.js
+out/**/*.test.js

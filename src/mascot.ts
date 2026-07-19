@@ -1,5 +1,11 @@
 import * as vscode from 'vscode';
 import { getNonce } from './util';
+import {
+  TUNABLE_TARGETS,
+  readColorOverride,
+  setColorOverride,
+  type TunableTarget,
+} from './customize';
 
 export type Faction =
   | 'bloodAngels'
@@ -1200,6 +1206,18 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
       faction
     );
 
+    webviewView.webview.onDidReceiveMessage((msg) => {
+      if (!msg || typeof msg.command !== 'string') return;
+      if (msg.command === 'setColor' && typeof msg.id === 'string') {
+        const t = TUNABLE_TARGETS.find((x) => x.id === msg.id);
+        if (t && /^#[0-9a-fA-F]{6}$/.test(msg.value)) {
+          void setColorOverride(t.key, msg.value, t.kind, t.alpha);
+        }
+      } else if (msg.command === 'openPalette') {
+        void this.openPalettePicker();
+      }
+    });
+
     webviewView.onDidDispose(() => {
       this.view = undefined;
       if (this.idleTimer) clearTimeout(this.idleTimer);
@@ -1234,6 +1252,57 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
     this.queuedTransmission = undefined;
   }
 
+  /** Current hex for a target: existing override, else the faction default. */
+  private currentHex(t: TunableTarget): string {
+    const raw = readColorOverride(t.key, t.kind) ??
+      (FACTION_PALETTE[this.getFaction()] as unknown as Record<string, string>)[t.paletteKey];
+    const m = /^#[0-9a-fA-F]{6}/.exec(raw ?? '');
+    return m ? m[0] : '#c9a84c';
+  }
+
+  /** Feature — QuickPick faction-palette flow (target → swatch/custom hex). */
+  private async openPalettePicker(): Promise<void> {
+    const target = await vscode.window.showQuickPick(
+      TUNABLE_TARGETS.map((t) => ({ label: t.label, id: t.id })),
+      { placeHolder: 'What to recolour?' }
+    );
+    if (!target) return;
+    const t = TUNABLE_TARGETS.find((x) => x.id === target.id)!;
+
+    const p = FACTION_PALETTE[this.getFaction()];
+    const swatches: { label: string; hex: string }[] = [
+      { label: `● Accent      ${p.accent}`, hex: p.accent },
+      { label: `● Accent Dim  ${p.accentDim}`, hex: p.accentDim },
+      { label: `● Gold        ${p.gold}`, hex: p.gold },
+      { label: `● Gold Dim    ${p.goldDim}`, hex: p.goldDim },
+      { label: `● Base        ${p.bgBase}`, hex: p.bgBase },
+      { label: '✎ Custom hex…', hex: '' },
+    ];
+    const pick = await vscode.window.showQuickPick(swatches, {
+      placeHolder: `Colour for "${t.label}"`,
+    });
+    if (!pick) return;
+
+    let hex = pick.hex;
+    if (!hex) {
+      const input = await vscode.window.showInputBox({
+        prompt: `Hex colour for "${t.label}"`,
+        value: this.currentHex(t),
+        validateInput: (v) =>
+          /^#[0-9a-fA-F]{6}$/.test(v) ? null : 'Expected #rrggbb',
+      });
+      if (!input) return;
+      hex = input;
+    }
+
+    await setColorOverride(t.key, hex, t.kind, t.alpha);
+    void this.view?.webview.postMessage({
+      command: 'syncColor',
+      id: t.id,
+      value: hex,
+    });
+  }
+
   private buildHtml(mascotSrc: string, cspSource: string, faction: Faction): string {
     const nonce = getNonce();
     const p = FACTION_PALETTE[faction];
@@ -1241,6 +1310,12 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
 
     const statusPool = STATUS_LINES[faction];
     const initStatus = statusPool[Math.floor(Math.random() * statusPool.length)];
+
+    const tuneData = TUNABLE_TARGETS.map((t) => ({
+      id: t.id,
+      label: t.label,
+      value: this.currentHex(t),
+    }));
 
     return /* html */`<!DOCTYPE html>
 <html lang="en">
@@ -1521,6 +1596,73 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
     border-color: ${gold}35;
     color: var(--gold);
   }
+
+  .tune-plate {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: ${gold}12;
+    border: 1px solid ${gold}30;
+    border-radius: 3px;
+    padding: 4px 10px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.18s ease, background 0.18s ease;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tune-plate:hover { opacity: 1; background: ${gold}20; }
+  .tune-plate::before { content: '✚'; color: var(--accent); }
+
+  .tune-panel {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 10px 8px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
+    border: 1px solid ${accent}28;
+    border-radius: 4px;
+  }
+  .tune-panel.open { display: flex; }
+
+  .tune-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .tune-label {
+    font-size: 10px;
+    color: var(--text);
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+  }
+  .tune-row input[type="color"] {
+    width: 26px; height: 18px;
+    padding: 0;
+    border: 1px solid ${gold}40;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .tune-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 1px; }
+  .tune-row input[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
+
+  .palette-btn {
+    margin-top: 2px;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: ${accent}18;
+    border: 1px solid ${accent}35;
+    border-radius: 3px;
+    padding: 5px 8px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.18s ease, background 0.18s ease;
+  }
+  .palette-btn:hover { opacity: 1; background: ${accent}28; }
 </style>
 </head>
 <body>
@@ -1558,13 +1700,48 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
     <span class="status-text" id="statusText">${initStatus}</span>
   </div>
 
+  <div class="tune-plate" id="tunePlate">Calibration Rites</div>
+
+  <div class="tune-panel" id="tunePanel">
+    <div id="tuneRows"></div>
+    <button class="palette-btn" id="paletteBtn">⚙ Faction Palette</button>
+  </div>
+
 </div>
 
 <script nonce="${nonce}">
+  const vscodeApi  = acquireVsCodeApi();
   const scrollText = document.getElementById('scrollText');
   const sig        = document.getElementById('sig');
   const badge      = document.getElementById('eventBadge');
   const statusEl   = document.getElementById('statusText');
+
+  // ── Colour calibration plate ──────────────────────────────────────────────
+  const TUNE = ${JSON.stringify(tuneData)};
+  const tuneRows = document.getElementById('tuneRows');
+  TUNE.forEach((t) => {
+    const row = document.createElement('label');
+    row.className = 'tune-row';
+    const label = document.createElement('span');
+    label.className = 'tune-label';
+    label.textContent = t.label;
+    const input = document.createElement('input');
+    input.type = 'color';
+    input.value = t.value;
+    input.dataset.id = t.id;
+    input.addEventListener('change', () =>
+      vscodeApi.postMessage({ command: 'setColor', id: t.id, value: input.value })
+    );
+    row.appendChild(label);
+    row.appendChild(input);
+    tuneRows.appendChild(row);
+  });
+  document.getElementById('tunePlate').addEventListener('click', () =>
+    document.getElementById('tunePanel').classList.toggle('open')
+  );
+  document.getElementById('paletteBtn').addEventListener('click', () =>
+    vscodeApi.postMessage({ command: 'openPalette' })
+  );
 
   const STATUS_LINES = ${JSON.stringify(statusPool)};
   const EVENT_LABELS = {
@@ -1639,6 +1816,11 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
       case 'transmission':
         setMessageVerbatim(data.message, '— Servo-Skull 7-Theta');
         break;
+      case 'syncColor': {
+        const el = tuneRows.querySelector('input[data-id="' + data.id + '"]');
+        if (el) el.value = data.value;
+        break;
+      }
     }
   });
 </script>
