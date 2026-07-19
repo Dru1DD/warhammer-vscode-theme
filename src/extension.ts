@@ -1,5 +1,9 @@
 import * as vscode from 'vscode';
 import { MascotViewProvider } from './mascot';
+import { registerCustomizeThemeCommand } from './customize';
+import { detectStack, resolveStackLines } from './stack';
+import { PuritySealTracker } from './milestones';
+import { maybeShowOnboarding, registerOnboardingCommand } from './onboarding';
 
 const TRANSMISSIONS = [
   '"The flesh is weak. The code must be pure." — Servo-Skull 7-Theta',
@@ -54,6 +58,16 @@ function getMascotConfig() {
 
 export function activate(context: vscode.ExtensionContext) {
 
+  // ── Onboarding (Feature 5) ─────────────────────────────────────────────────
+  void maybeShowOnboarding(context);
+  registerOnboardingCommand(context);
+
+  // ── Theme customization injector (Feature 1) ───────────────────────────────
+  registerCustomizeThemeCommand(context);
+
+  // ── Purity-seal milestone tracker (Feature 4) ──────────────────────────────
+  const seals = new PuritySealTracker(context);
+
   // ── Status-bar companion (existing) ────────────────────────────────────────
 
   const statusBarItem = vscode.window.createStatusBarItem(
@@ -72,6 +86,14 @@ export function activate(context: vscode.ExtensionContext) {
       webviewOptions: { retainContextWhenHidden: true },
     })
   );
+
+  // ── Smart project context (Feature 2) ──────────────────────────────────────
+  // Detect the tech stack up front and whenever the workspace folders change,
+  // feeding tailored projectOpen lines into the mascot.
+  function refreshStackContext() {
+    void detectStack().then((ids) => mascot.setStackContext(resolveStackLines(ids)));
+  }
+  refreshStackContext();
 
   function isCompanionEnabled(): boolean {
     return getCompanionConfig().get<boolean>('enabled', true);
@@ -170,12 +192,21 @@ export function activate(context: vscode.ExtensionContext) {
     if (!folders?.length) return;
     const pattern = new vscode.RelativePattern(folders[0], '.git/COMMIT_EDITMSG');
     gitWatcher = vscode.workspace.createFileSystemWatcher(pattern);
-    gitWatcher.onDidChange(() => mascot.show('gitCommit'));
-    gitWatcher.onDidCreate(() => mascot.show('gitCommit'));
+    // Milestone counting (Feature 4) runs independently of the mascot pacing
+    // engine — every commit is counted even when the skull stays silent.
+    const onCommit = () => {
+      void seals.recordCommit();
+      mascot.show('gitCommit');
+    };
+    gitWatcher.onDidChange(onCommit);
+    gitWatcher.onDidCreate(onCommit);
   }
   setupGitWatcher();
 
-  const workspaceFoldersListener = vscode.workspace.onDidChangeWorkspaceFolders(setupGitWatcher);
+  const workspaceFoldersListener = vscode.workspace.onDidChangeWorkspaceFolders(() => {
+    setupGitWatcher();
+    refreshStackContext();
+  });
 
   let firstEditTime: number | undefined;
   let longSessionShown = false;

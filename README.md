@@ -1,6 +1,6 @@
 # Warhammer 40k: Grimdark Elite
 
-> *"In the grim darkness of the far future, there is only code."*
+> _"In the grim darkness of the far future, there is only code."_
 
 A premium VS Code theme collection inspired by the factions of Warhammer 40k. Designed for developers who want **elegant**, **atmospheric**, and **genuinely comfortable** tooling — not a gamer aesthetic.
 
@@ -20,7 +20,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.5.0.vsix
+code --install-extension warhammer-40k-theme-0.6.0.vsix
 ```
 
 Or install via the VS Code UI:
@@ -28,7 +28,7 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.5.0.vsix`
+4. Select `warhammer-40k-theme-0.6.0.vsix`
 5. Reload VS Code when prompted
 
 ### Apply a theme
@@ -59,12 +59,12 @@ Cold metallic greens on obsidian black. Minimal syntax noise. "Digital tomb" aes
 
 **Palette feel:** Necrodermis awakening. A tomb world processing its first command in sixty million years.
 
-| Role | Color |
-|---|---|
-| Keywords | Spectral green |
+| Role      | Color            |
+| --------- | ---------------- |
+| Keywords  | Spectral green   |
 | Functions | Necrodermis teal |
-| Types | Void teal |
-| Strings | Muted cold-green |
+| Types     | Void teal        |
+| Strings   | Muted cold-green |
 
 #### Ultramarines
 
@@ -72,12 +72,12 @@ Imperial blue and gold on dark navy. Highly readable. Structured like a tactical
 
 **Palette feel:** Fortress Monastery command room. Codex Astartes printed in gilt on vellum.
 
-| Role | Color |
-|---|---|
-| Keywords | Imperial blue |
+| Role      | Color         |
+| --------- | ------------- |
+| Keywords  | Imperial blue |
 | Functions | Imperial gold |
-| Types | Steel blue |
-| Strings | Parchment |
+| Types     | Steel blue    |
+| Strings   | Parchment     |
 
 #### Adeptus Mechanicus
 
@@ -85,12 +85,12 @@ Dark industrial red-brown with brass and amber. Techno-religious. Terminal-preci
 
 **Palette feel:** Forge World cogitator array. The Omnissiah's logic engines processing litanies.
 
-| Role | Color |
-|---|---|
-| Keywords | Amber-brass |
-| Functions | Bright brass |
-| Types | Copper |
-| Strings | Warm amber inscription |
+| Role      | Color                  |
+| --------- | ---------------------- |
+| Keywords  | Amber-brass            |
+| Functions | Bright brass           |
+| Types     | Copper                 |
+| Strings   | Warm amber inscription |
 
 #### Death Guard
 
@@ -98,12 +98,12 @@ Murky organic greens and bone yellows. Heavy contrast. Slow, inevitable palette.
 
 **Palette feel:** Plague hulk drifting through the warp. Decay as permanence.
 
-| Role | Color |
-|---|---|
-| Keywords | Plague green |
-| Functions | Bone yellow |
-| Types | Murky grey-green |
-| Strings | Dirty amber |
+| Role      | Color            |
+| --------- | ---------------- |
+| Keywords  | Plague green     |
+| Functions | Bone yellow      |
+| Types     | Murky grey-green |
+| Strings   | Dirty amber      |
 
 #### Salamanders
 
@@ -111,12 +111,12 @@ Warm forest greens and forge amber on near-black. Mid-dark — brighter than the
 
 **Palette feel:** Nocturne forge. Vulkan's armoury. Fire-lit promethium vault.
 
-| Role | Color |
-|---|---|
-| Keywords | Forest green |
-| Functions | Forge amber |
-| Types | Muted grey-green |
-| Strings | Warm amber |
+| Role      | Color            |
+| --------- | ---------------- |
+| Keywords  | Forest green     |
+| Functions | Forge amber      |
+| Types     | Muted grey-green |
+| Strings   | Warm amber       |
 
 #### Imperial Fists
 
@@ -124,12 +124,12 @@ Warm charcoal base with controlled tactical gold. Subdued and readable — the g
 
 **Palette feel:** Phalanx command deck. Siege warfare conducted with perfect patience.
 
-| Role | Color |
-|---|---|
-| Keywords | Dull gold |
-| Functions | Tactical gold |
-| Types | Warm grey |
-| Strings | Aged parchment |
+| Role      | Color          |
+| --------- | -------------- |
+| Keywords  | Dull gold      |
+| Functions | Tactical gold  |
+| Types     | Warm grey      |
+| Strings   | Aged parchment |
 
 #### Craftworld Eldar
 
@@ -137,12 +137,12 @@ Cool blue-grey base with pale silver-blue and soft violet. Refined, alien, impos
 
 **Palette feel:** Craftworld wraithbone spire. An infinity circuit parsing ancient light.
 
-| Role | Color |
-|---|---|
-| Keywords | Muted blue |
+| Role      | Color            |
+| --------- | ---------------- |
+| Keywords  | Muted blue       |
 | Functions | Pale silver-blue |
-| Types | Soft violet |
-| Strings | Deep teal |
+| Types     | Soft violet      |
+| Strings   | Deep teal        |
 
 #### Tau Empire
 
@@ -150,12 +150,12 @@ Dark blue-grey base with clean ice-blue function highlights and controlled steel
 
 **Palette feel:** Kor'vattra command interface. The Greater Good rendered in pure signal.
 
-| Role | Color |
-|---|---|
-| Keywords | Steel blue |
-| Functions | Ice blue |
-| Types | Blue-grey |
-| Strings | Cool teal |
+| Role      | Color      |
+| --------- | ---------- |
+| Keywords  | Steel blue |
+| Functions | Ice blue   |
+| Types     | Blue-grey  |
+| Strings   | Cool teal  |
 
 ---
 
@@ -169,12 +169,12 @@ Pale stone base with muted crimson accents and tactical grey. Swift and clean �
 
 **Palette feel:** Open steppe horizon. White armor under a wide sky. Wind before the charge.
 
-| Role | Color |
-|---|---|
-| Keywords | Muted crimson |
-| Functions | Deep slate-blue |
-| Types | Tactical blue-grey |
-| Strings | Dark crimson-brown |
+| Role      | Color              |
+| --------- | ------------------ |
+| Keywords  | Muted crimson      |
+| Functions | Deep slate-blue    |
+| Types     | Tactical blue-grey |
+| Strings   | Dark crimson-brown |
 
 #### Thousand Sons
 
@@ -182,12 +182,12 @@ Dusty blue-parchment base with arcane dusty blue and turquoise function highligh
 
 **Palette feel:** Tizca before the burning. Illuminated manuscripts beneath a cyclopean sky.
 
-| Role | Color |
-|---|---|
-| Keywords | Arcane dusty blue |
-| Functions | Arcane turquoise |
-| Types | Deep violet |
-| Strings | Aged ochre |
+| Role      | Color             |
+| --------- | ----------------- |
+| Keywords  | Arcane dusty blue |
+| Functions | Arcane turquoise  |
+| Types     | Deep violet       |
+| Strings   | Aged ochre        |
 
 #### Sisters of Battle
 
@@ -195,12 +195,12 @@ Warm ivory base with cathedral crimson and relic gold. Devotional intensity held
 
 **Palette feel:** Ecclesiarchy scriptorium. Candle-lit iron and gilt.
 
-| Role | Color |
-|---|---|
-| Keywords | Cathedral crimson |
-| Functions | Relic gold |
-| Types | Deep burgundy |
-| Strings | Dusty ochre |
+| Role      | Color             |
+| --------- | ----------------- |
+| Keywords  | Cathedral crimson |
+| Functions | Relic gold        |
+| Types     | Deep burgundy     |
+| Strings   | Dusty ochre       |
 
 #### Raven Guard
 
@@ -208,12 +208,12 @@ Fog-grey base with dark tactical slate and pale silver. Quiet. Deliberate. Nothi
 
 **Palette feel:** Low cloud over a ruined hive. Shadow-black armour in mist.
 
-| Role | Color |
-|---|---|
-| Keywords | Dark tactical slate |
-| Functions | Tactical blue-grey |
-| Types | Deep blue-slate |
-| Strings | Muted teal |
+| Role      | Color               |
+| --------- | ------------------- |
+| Keywords  | Dark tactical slate |
+| Functions | Tactical blue-grey  |
+| Types     | Deep blue-slate     |
+| Strings   | Muted teal          |
 
 #### Alpha Legion
 
@@ -221,12 +221,12 @@ Muted teal base with layered blue-grey contrast. Every layer has a layer beneath
 
 **Palette feel:** Hydra-cell coordination grid. A plan within a plan within a plan.
 
-| Role | Color |
-|---|---|
-| Keywords | Deep teal-blue |
-| Functions | Layered teal |
-| Types | Slate blue |
-| Strings | Steel-teal |
+| Role      | Color          |
+| --------- | -------------- |
+| Keywords  | Deep teal-blue |
+| Functions | Layered teal   |
+| Types     | Slate blue     |
+| Strings   | Steel-teal     |
 
 #### Custodes
 
@@ -234,12 +234,12 @@ Pale warm marble base with restrained gold and imperial ivory. Authoritative wit
 
 **Palette feel:** Sanctum Imperialis atrium. Gold-chased marble. Ten thousand years of patience.
 
-| Role | Color |
-|---|---|
-| Keywords | Deep amber-brown |
-| Functions | Restrained gold |
-| Types | Warm umber |
-| Strings | Muted ochre |
+| Role      | Color            |
+| --------- | ---------------- |
+| Keywords  | Deep amber-brown |
+| Functions | Restrained gold  |
+| Types     | Warm umber       |
+| Strings   | Muted ochre      |
 
 ---
 
@@ -262,6 +262,7 @@ Faction identity lives in the syntax hierarchy and active UI states. Dark themes
 The Servo-Skull mascot lives permanently in your **Explorer sidebar**. Open the Explorer panel and look for the **Servo-Skull** section.
 
 The view shows:
+
 - The Servo-Skull mascot with a continuous floating animation and faction-colored pulsing glow ring
 - A Warhammer-style background with faction tint, diagonal texture, and gothic corner ornaments
 - A message area that updates in-place when events fire, with smooth cross-fade transitions
@@ -282,25 +283,25 @@ An ambient companion in your status bar with rotating Imperial status labels and
 
 Messages update in the sidebar view automatically when these events fire:
 
-| Event | Description |
-|---|---|
-| `projectOpen` | Fires 3.5 seconds after VS Code opens a workspace |
-| `taskSuccess` | Build/test task exits with code 0 |
-| `taskFail` | Build/test task exits with non-zero code |
-| `gitCommit` | `.git/COMMIT_EDITMSG` changes (detects a new commit) |
-| `longSession` | Fires after N hours of continuous editing (configurable) |
-| `ambient` | Random unprompted appearance at configurable frequency |
-| `lateNight` | Ambient variant that fires automatically between midnight and 5am |
+| Event         | Description                                                       |
+| ------------- | ----------------------------------------------------------------- |
+| `projectOpen` | Fires 3.5 seconds after VS Code opens a workspace                 |
+| `taskSuccess` | Build/test task exits with code 0                                 |
+| `taskFail`    | Build/test task exits with non-zero code                          |
+| `gitCommit`   | `.git/COMMIT_EDITMSG` changes (detects a new commit)              |
+| `longSession` | Fires after N hours of continuous editing (configurable)          |
+| `ambient`     | Random unprompted appearance at configurable frequency            |
+| `lateNight`   | Ambient variant that fires automatically between midnight and 5am |
 
 Each faction has a dedicated voice pool for every event — 7 events × 16 factions.
 
 ### Commands
 
-| Command | Description |
-|---|---|
-| `Warhammer 40k: Toggle Servo-Skull Companion` | Enable or disable the status bar companion |
-| `Warhammer 40k: Consult the Servo-Skull` | Request an immediate status bar transmission |
-| `Warhammer 40k: Summon the Servo-Skull` | Trigger an ambient transmission in the sidebar |
+| Command                                       | Description                                    |
+| --------------------------------------------- | ---------------------------------------------- |
+| `Warhammer 40k: Toggle Servo-Skull Companion` | Enable or disable the status bar companion     |
+| `Warhammer 40k: Consult the Servo-Skull`      | Request an immediate status bar transmission   |
+| `Warhammer 40k: Summon the Servo-Skull`       | Trigger an ambient transmission in the sidebar |
 
 ### Settings
 
@@ -320,24 +321,24 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
 
 `faction` accepts `"auto"` (inherits from active theme) or any of the 16 faction keys:
 
-| Value | Faction |
-|---|---|
-| `bloodAngels` | Blood Angels — noble crimson authority |
-| `deathwatch` | Deathwatch — tactical dark precision |
-| `necrons` | Necrons — ancient machine consciousness |
-| `ultramarines` | Ultramarines — codex-adherent authority |
-| `mechanicus` | Adeptus Mechanicus — sacred machine communion |
-| `deathGuard` | Death Guard — plague-touched endurance |
-| `salamanders` | Salamanders — forge-craft and kinship |
-| `imperialFists` | Imperial Fists — unyielding fortification |
-| `craftEldar` | Craftworld Eldar — ancient sorrowful foresight |
-| `tau` | Tau Empire — the Greater Good |
-| `whiteScars` | White Scars — speed and open sky |
-| `thousandSons` | Thousand Sons — cursed arcane knowledge |
-| `sistersBattle` | Sisters of Battle — faith as weapon and shield |
-| `ravenGuard` | Raven Guard — strike from silence |
-| `alphaLegion` | Alpha Legion — every plan has a plan |
-| `custodes` | Adeptus Custodes — gold-clad imperial certainty |
+| Value           | Faction                                         |
+| --------------- | ----------------------------------------------- |
+| `bloodAngels`   | Blood Angels — noble crimson authority          |
+| `deathwatch`    | Deathwatch — tactical dark precision            |
+| `necrons`       | Necrons — ancient machine consciousness         |
+| `ultramarines`  | Ultramarines — codex-adherent authority         |
+| `mechanicus`    | Adeptus Mechanicus — sacred machine communion   |
+| `deathGuard`    | Death Guard — plague-touched endurance          |
+| `salamanders`   | Salamanders — forge-craft and kinship           |
+| `imperialFists` | Imperial Fists — unyielding fortification       |
+| `craftEldar`    | Craftworld Eldar — ancient sorrowful foresight  |
+| `tau`           | Tau Empire — the Greater Good                   |
+| `whiteScars`    | White Scars — speed and open sky                |
+| `thousandSons`  | Thousand Sons — cursed arcane knowledge         |
+| `sistersBattle` | Sisters of Battle — faith as weapon and shield  |
+| `ravenGuard`    | Raven Guard — strike from silence               |
+| `alphaLegion`   | Alpha Legion — every plan has a plan            |
+| `custodes`      | Adeptus Custodes — gold-clad imperial certainty |
 
 `ambientFrequency` accepts `"off"`, `"rare"` (every 90–130 min), or `"occasional"` (every 45–75 min).
 
@@ -346,6 +347,7 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
 ## Language Support
 
 Full semantic highlighting for:
+
 - TypeScript / JavaScript / JSX / TSX
 - Python
 - Rust
@@ -404,4 +406,4 @@ Enable semantic highlighting for the best experience:
 
 ## License
 
-MIT — *In the Emperor's name, this code may be freely distributed.*
+MIT — _In the Emperor's name, this code may be freely distributed._

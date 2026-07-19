@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { getNonce } from './util';
 
 export type Faction =
   | 'bloodAngels'
@@ -957,10 +958,6 @@ const STATUS_LINES: Record<Faction, string[]> = {
   custodes:      ['Golden Throne: Stable', 'Imperial Standard: Met', 'Vigil: Absolute', 'Perfection: Approached'],
 };
 
-function getNonce(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  return Array.from({ length: 32 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-}
 
 const EVENT_PRIORITY: Record<TriggerEvent, number> = {
   taskFail: 3,
@@ -1030,7 +1027,27 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
   private pendingTransmission?: string;
   private queuedTransmission?: string;
 
+  /** Feature 2 — tailored projectOpen lines for the detected tech stack. */
+  private stackLines: string[] = [];
+
   constructor(private readonly context: vscode.ExtensionContext) { }
+
+  /**
+   * Feature 2 — supplies stack-specific projectOpen lines. Pass an empty array
+   * to clear (e.g. workspace closed), which restores the standard pool.
+   */
+  setStackContext(lines: string[]): void {
+    this.stackLines = Array.isArray(lines) ? lines : [];
+  }
+
+  /** Feature 3 — user-authored lore lines, merged into every message pool. */
+  private getCustomMessages(): string[] {
+    const raw = vscode.workspace
+      .getConfiguration('warhammer.companion')
+      .get<string[]>('customMessages', []);
+    if (!Array.isArray(raw)) return [];
+    return raw.filter((s) => typeof s === 'string' && s.trim().length > 0);
+  }
 
   private getConfig() {
     return vscode.workspace.getConfiguration('warhammer.mascot');
@@ -1048,7 +1065,17 @@ export class MascotViewProvider implements vscode.WebviewViewProvider {
   }
 
   private getMessage(event: TriggerEvent): string {
-    const pool = MESSAGES[this.getFaction()][event];
+    // Feature 2: when a stack was detected, projectOpen prefers tailored lines;
+    // otherwise fall back to the faction's standard pool.
+    const base =
+      event === 'projectOpen' && this.stackLines.length > 0
+        ? this.stackLines
+        : MESSAGES[this.getFaction()][event];
+
+    // Feature 3: merge in the user's custom lore lines across all events.
+    const custom = this.getCustomMessages();
+    const pool = custom.length > 0 ? [...base, ...custom] : base;
+
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
