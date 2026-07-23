@@ -35,6 +35,10 @@ Or install via the VS Code UI:
 
 `Cmd+Shift+P` → **Preferences: Color Theme** → select your faction
 
+### Apply the icon theme
+
+`Cmd+Shift+P` → **Preferences: File Icon Theme** → **Warhammer 40k: Grimdark Sigils**
+
 ---
 
 ## Themes
@@ -255,6 +259,20 @@ Faction identity lives in the syntax hierarchy and active UI states. Dark themes
 
 ---
 
+## Icon Theme
+
+**Warhammer 40k: Grimdark Sigils** — 33 custom file/folder SVG icons covering common languages, config formats, and file types. Enable via `Cmd+Shift+P` → **Preferences: File Icon Theme**.
+
+---
+
+## Theme Customization
+
+`Warhammer 40k: Customize Theme (Inject Colour Rites)` layers a curated, faction-neutral palette (title bar, activity bar, status bar, cursor, terminal ANSI colors) on top of whichever theme is active. Existing `workbench.colorCustomizations` keys are preserved — only the managed keys are written.
+
+For finer control, the Servo-Skull sidebar view offers **per-key colour tuning**: pick a target (comments, cursor, active line number, activity bar icons, status bar background, selection) and a swatch or custom hex. Overrides are written theme-scoped, so a tweak sticks to the faction it was made under.
+
+---
+
 ## Servo-Skull Companion
 
 ### Explorer Sidebar
@@ -295,6 +313,10 @@ Messages update in the sidebar view automatically when these events fire:
 
 Each faction has a dedicated voice pool for every event — 7 events × 16 factions.
 
+**Tech-Priest Mode:** on `projectOpen`, the workspace is inspected for a recognizable manifest (React, Vue, Rust, Go, Python, Node) and the transmission is tailored to the detected stack.
+
+**Purity Seal milestones:** a lifetime commit counter persists across sessions; a notification fires at 10, 50, 100, 250, 500, and 1000 commits.
+
 ### Commands
 
 | Command                                       | Description                                    |
@@ -302,6 +324,8 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
 | `Warhammer 40k: Toggle Servo-Skull Companion` | Enable or disable the status bar companion     |
 | `Warhammer 40k: Consult the Servo-Skull`      | Request an immediate status bar transmission   |
 | `Warhammer 40k: Summon the Servo-Skull`       | Trigger an ambient transmission in the sidebar |
+| `Warhammer 40k: Customize Theme (Inject Colour Rites)` | Layer a curated chrome palette on the active theme |
+| `Warhammer 40k: Open the Inquisition Terminal` | Reopen the welcome page                        |
 
 ### Settings
 
@@ -394,13 +418,14 @@ Enable semantic highlighting for the best experience:
 
 ## Roadmap
 
-- [ ] Icon theme with Imperial sigils for common file types
+- [x] Icon theme with Imperial sigils for common file types
 - [x] Animated servo-skull sidebar companion
 - [x] 16 faction themes — 10 dark, 6 light
 - [x] 16-faction mascot with distinct voice lines and visual palettes
 - [x] Late-night transmission events
+- [x] Purity seal notifications for milestone commits
+- [x] Theme customization and per-key colour tuning
 - [ ] Sound pack: cogitator hum, servo-skull chirps (opt-in)
-- [ ] Purity seal notifications for milestone commits
 
 ---
 

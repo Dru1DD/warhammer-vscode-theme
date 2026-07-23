@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.1
+
+### Added
+
+- **Grimdark Sigils icon theme** — 33 custom SVG file/folder icons (`Warhammer 40k: Grimdark Sigils`), covering common languages, config formats, and file types, selectable via **Preferences: File Icon Theme**
+- **Theme Customization command** (`Warhammer 40k: Customize Theme (Inject Colour Rites)`) — injects a curated, faction-neutral chrome palette (title bar, activity bar, status bar, cursor, terminal ANSI) on top of whichever theme is active
+- **Per-key colour tuning** via the Servo-Skull sidebar — pick a target (comments, cursor, active line number, activity bar icons, status bar background, selection) and a swatch or custom hex; overrides are written theme-scoped, so a tweak only affects the faction it was made under
+- **Inquisition Terminal welcome page** (`Warhammer 40k: Open the Inquisition Terminal`) — full-editor webview shown once on first activation, reopenable any time
+- **Tech-Priest Mode** — detects the workspace's tech stack (React, Vue, Rust, Go, Python, Node) from manifest files and tailors the `projectOpen` voice line accordingly
+- **Purity Seal milestones** — lifetime commit counter persisted across sessions; a native notification fires at 10, 50, 100, 250, 500, and 1000 commits
+
+---
+
 ## 0.5.0
 
 ### Added
