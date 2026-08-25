@@ -1,0 +1,7 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Activity bar icons are monochrome: VS Code recolours currentColor. -->
+  <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H10a2 2 0 0 1 2 2 2 2 0 0 1 2-2h4.5A1.5 1.5 0 0 1 20 4.5v13a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 0 0-2 2 2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 17.5v-13Z"
+        stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M12 5v16" stroke="currentColor" stroke-width="1.4"/>
+  <path d="M6.5 7.5h3M6.5 10.5h3M14.5 7.5h3M14.5 10.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.75"/>
+</svg>

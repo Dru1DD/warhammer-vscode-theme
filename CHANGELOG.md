@@ -1,14 +1,59 @@
 # Changelog
 
+## 0.7.0
+
+### Added
+
+- **Librarium — local project knowledge graph** — a dedicated webview that maps how the current codebase is actually connected. Built entirely from local source: no API keys, no accounts, no network access.
+
+  - **Three levels of abstraction** — `ARCHITECTURE` (workspace → collapsible directories → files, the default), `FILES` (directional file-to-file dependencies), and `ENTITIES` (classes, functions, interfaces, types, React components and the calls between them). Detail is revealed progressively; entity records stream on demand rather than all at once.
+  - **Real parsing, not regex** — TypeScript, JavaScript and TSX/JSX are parsed with the TypeScript compiler API. Go uses a comment- and string-aware scanner with brace tracking, so declarations inside comments or string literals cannot create phantom records.
+  - **Pluggable analyzers** — every language produces the same language-agnostic `CodeNode` / `CodeEdge` graph model. Adding a language means writing one analyzer.
+  - **Relationships** — `contains`, `imports`, `dependsOn` (external packages), `calls`, `extends` (including embedded Go structs), `implements`, and `renders` for React components.
+  - **Inspector panel** — record type, file, line range, dependency and dependent counts, methods, exports, imports, callers and children, with **Open Source** jumping to the exact file and line through the standard VS Code navigation.
+  - **Focus mode** — collapses the graph to the selected record plus its direct dependencies and dependents.
+  - **Search** — across files, directories, classes, functions, components, interfaces and types; selecting a result switches level, expands the path to it, and centres the graph on it. `/` focuses search, `f` toggles Focus, `Esc` clears.
+  - **Filters** — by record type and by relationship type; nothing filtered by default.
+  - **Metrics** — project summary, dependency hubs ranked by import degree, and **Heresy Detected**: circular dependencies found via strongly-connected components and displayed as a concrete ring.
+  - **Recent Changes** — recently committed files, read from git when available. Git is optional and never required.
+  - **Current-file bridge** — opening the Librarium with a file active selects that file's record; a right-click action in the editor and Explorer opens it focused on any supported file.
+  - **Faction-aware styling** — one stylesheet driven by semantic CSS variables, fed from the existing faction palette and the active theme's light/dark kind. Repaints live when the theme changes.
+  - **Performance** — per-file analysis cached by mtime and size and persisted to workspace storage, a debounced file watcher that invalidates only what changed, a configurable index cap (`warhammer.librarium.maxFiles`, default 2500), and a canvas renderer that draws at most the 800 most connected records per level.
+
+  - **Activity-bar entry** — a book icon opens the Librarium directly, with a small side panel for re-indexing and focusing the current file.
+  - **File outlines** — clicking a file lists its declarations (classes, functions, interfaces, types, with methods nested); clicking one jumps to its line, and double-clicking the file draws those declarations inline in the graph.
+  - **Orientation for large graphs** — minimap with a live viewport rectangle, hover tooltips, a status strip naming the level and selection with one-click escapes, zoom controls, and a directory-clustered layout that groups records into labelled module blocks past ~60 nodes.
+  - **Progressive opening** — directories open a level at a time within a readability budget, and collapsed directories show the number of files they hold. Small projects still open fully.
+
+- **Three new commands** — `Warhammer 40k: Consult the Librarium`, `Warhammer 40k: Refresh Librarium`, `Warhammer 40k: Focus Librarium on Current File`
+- **New setting** — `warhammer.librarium.maxFiles` (default 2500, range 100–20000)
+- **Editor and Explorer context-menu action** for supported source files
+
+### Fixed
+
+- `import type { X } from './y'` was not being flagged as a type-only import by the new analyzer (caught by the test suite before release)
+- Webview CSP blocked every write to `element.style`, which silently broke tooltip positioning and live theme switching. Dynamic styles now go through a single nonced stylesheet; the CSP itself was not weakened.
+- Graph layouts no longer overlap or degenerate: wide directories and layers wrap into grids instead of one endless row, node width follows the label, and Fit stops at the zoom where labels are still rendered
+- `.vscodeignore` no longer ships compiled tests and sourcemaps: a blanket `!out/**` negation was overriding the `**/*.map` and test exclusions below it
+
+### Changed
+
+- `getFactionFromThemeName` and `FACTION_PALETTE` are now exported from the mascot module so the Librarium derives its theme from the same source of truth instead of duplicating it
+- `typescript` moved from `devDependencies` to `dependencies` — the compiler API ships with the extension. Only `lib/typescript.js` is packaged, not the whole package.
+- `npm test` runs the full self-check suite (32 Librarium checks plus the existing customize check)
+
+---
+
 ## 0.6.1
 
 ### Added
 
-- **Grimdark Sigils icon theme** — 33 custom SVG file/folder icons (`Warhammer 40k: Grimdark Sigils`), covering common languages, config formats, and file types, selectable via **Preferences: File Icon Theme**
+- **Grimdark Sigils icon theme** — 37 custom SVG file/folder icons (`Warhammer 40k: Grimdark Sigils`), covering common languages, config formats, and file types, selectable via **Preferences: File Icon Theme**
 - **Theme Customization command** (`Warhammer 40k: Customize Theme (Inject Colour Rites)`) — injects a curated, faction-neutral chrome palette (title bar, activity bar, status bar, cursor, terminal ANSI) on top of whichever theme is active
 - **Per-key colour tuning** via the Servo-Skull sidebar — pick a target (comments, cursor, active line number, activity bar icons, status bar background, selection) and a swatch or custom hex; overrides are written theme-scoped, so a tweak only affects the faction it was made under
 - **Inquisition Terminal welcome page** (`Warhammer 40k: Open the Inquisition Terminal`) — full-editor webview shown once on first activation, reopenable any time
 - **Tech-Priest Mode** — detects the workspace's tech stack (React, Vue, Rust, Go, Python, Node) from manifest files and tailors the `projectOpen` voice line accordingly
+- **Custom lore lines** (`warhammer.companion.customMessages`) — your own message strings, merged into the ambient and event-driven pools alongside the built-in faction voices
 - **Purity Seal milestones** — lifetime commit counter persisted across sessions; a native notification fires at 10, 50, 100, 250, 500, and 1000 commits
 
 ---

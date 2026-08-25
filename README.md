@@ -4,7 +4,7 @@
 
 A premium VS Code theme collection inspired by the factions of Warhammer 40k. Designed for developers who want **elegant**, **atmospheric**, and **genuinely comfortable** tooling — not a gamer aesthetic.
 
-Sixteen themes. Ten dark. Six light. One Servo-Skull that watches everything.
+Sixteen themes. Ten dark. Six light. One Servo-Skull that watches everything — and a **Librarium** that maps how your codebase is actually connected.
 
 ---
 
@@ -20,7 +20,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.6.1.vsix
+code --install-extension warhammer-40k-theme-0.7.0.vsix
 ```
 
 Or install via the VS Code UI:
@@ -28,7 +28,7 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.6.1.vsix`
+4. Select `warhammer-40k-theme-0.7.0.vsix`
 5. Reload VS Code when prompted
 
 ### Apply a theme
@@ -259,9 +259,136 @@ Faction identity lives in the syntax hierarchy and active UI states. Dark themes
 
 ---
 
+## Librarium — Project Knowledge Graph
+
+> _"An archive is not a pile of records. It is the relations between them."_
+
+The Librarium is a visual map of how your codebase is actually connected — files, modules, classes, functions, components, interfaces, and the imports and calls that bind them. It is a code-intelligence tool wearing Imperial vestments, not a decorated graph viewer.
+
+**Everything is local.** No API keys, no accounts, no network calls, no external servers. The graph is built from your workspace on your machine by parsing your source. This is a product principle, not an implementation detail.
+
+### Opening it
+
+Click the **book icon** in the activity bar — that opens the Librarium directly, and the side panel next to it holds the quick actions (re-index, focus current file).
+
+Or: `Cmd+Shift+P` → **Warhammer 40k: Consult the Librarium**
+
+You can also right-click any supported file — in the editor or the Explorer — and choose **Warhammer 40k: Focus Librarium on Current File**. If the Librarium is opened while a file is active, it selects that file's record automatically, so there is always a bridge between the code you are reading and the architecture it belongs to.
+
+### Supported languages
+
+| Language                | How it is parsed                                      |
+| ----------------------- | ----------------------------------------------------- |
+| TypeScript              | TypeScript compiler API (real AST)                    |
+| JavaScript              | TypeScript compiler API (real AST)                    |
+| TSX / JSX               | TypeScript compiler API, with React component detection |
+| Go                      | Comment- and string-aware scanner (see limitations)   |
+
+Analyzers are pluggable: each one turns source into the same language-agnostic graph model, so adding a language means writing one analyzer, not touching the renderer.
+
+### The three levels
+
+The Librarium never dumps your whole repository on screen at once. It reveals detail as you ask for it.
+
+**ARCHITECTURE** — the default. Workspace → directories → files. Directories are collapsible; double-click one to expand or collapse its subtree. The top two levels open automatically, which is enough to read a project's shape without drowning in it.
+
+```text
+                    WORKSPACE
+                        │
+        ┌───────────────┼───────────────┐
+       API             AUTH          DATABASE
+        │               │               │
+    ┌───┴───┐       ┌───┴───┐           │
+ users.ts payments.ts login.ts      postgres.ts
+```
+
+**FILES** — file-to-file dependencies with directional arrows. External packages appear as their own record type rather than as phantom files.
+
+```text
+checkout.ts ──▶ payment.ts ──▶ stripe.ts
+```
+
+**ENTITIES** — classes, functions, interfaces, types, and React components, with the calls, inheritance, and renders between them. Entity records are streamed on demand for the file you are looking at and its neighbours, which is what keeps large repositories responsive.
+
+**Any file can be opened in place.** Click a file and the inspector lists its declarations — every class, function, interface and type, with a class's methods nested underneath. Clicking one jumps to that line. Double-click the file in the graph (or use **Show in graph**) to draw those declarations inline, next to the file they live in, without leaving the level you are on.
+
+### Finding your way around a large graph
+
+Large repositories are the case this view is designed for, so orientation is built in:
+
+- **Progressive opening** — directories open a whole level at a time, only while the visible record count stays readable. A small project ends up fully expanded; a large one starts at the module level, and every collapsed directory shows how many files it is holding.
+- **Minimap** — top right, with the current viewport drawn on it. Click or drag it to move.
+- **Clustered layout** — past ~60 records the graph groups by directory into labelled blocks, so the first question a big graph answers is "which module is this". Module labels stay legible at any zoom.
+- **Status strip** — under the toolbar: current level, selected record, how many records are drawn, and one-click ways out (clear focus, collapse declarations, clear filters).
+- **Hover** — any record shows its name, path and type on hover, so you are never looking at unlabelled boxes.
+- **Zoom controls and Fit** — Fit never zooms below the point where labels stop rendering; beyond that the minimap and panning are the way around.
+
+### Navigating from graph to source
+
+Click any record to open the inspector: its type, file, line range, dependency and dependent counts, methods, exports, imports, callers, and children. **Open Source** jumps straight to the file and line in VS Code — it uses the standard editor navigation, so it behaves exactly like any other Go-to.
+
+Clicking a record also highlights its direct relationships and dims everything else. **Focus** collapses the graph to just the selection plus its direct dependencies and dependents, which is the way to read a hub file in a large project.
+
+### Search and filters
+
+The search field finds files, directories, classes, functions, components, interfaces, and types. Selecting a result switches to whichever level can show it, expands the directories needed to reach it, and centres the graph on it.
+
+Filters narrow what is drawn — by record type (files, directories, components, classes, functions, interfaces, types, packages) and by relationship (imports, calls, extends, implements, renders, contains, external). Nothing is filtered by default; the plain view is the simple one.
+
+**Keyboard:** `/` focuses search · `↑` `↓` `Enter` move through results · `f` toggles Focus on the selection · `Esc` clears.
+
+**Mouse:** scroll to zoom · drag to pan · click to inspect · double-click a directory to open or collapse it · double-click a file to draw its declarations · `Alt`+double-click opens the source.
+
+### Metrics, hubs, and heresy
+
+The left rail carries a project summary — files, directories, classes, components, functions, interfaces, types, packages, and total relationships — plus three lists:
+
+- **Most Connected** — dependency hubs ranked by import degree. Clicking one focuses the graph on it.
+- **Heresy Detected** — circular dependencies, found with a strongly-connected-component pass and shown as a concrete ring (`auth.ts → user.ts → session.ts → auth.ts`), not an unordered blob. The lore label is decoration; the technical explanation stays visible.
+- **Recent Changes** — recently committed files, read from git when a repository is present. Git is entirely optional; without it this list is simply empty.
+
+### Relationships in the graph
+
+| Relationship | Meaning                                                           |
+| ------------ | ----------------------------------------------------------------- |
+| `contains`   | Workspace → directory → file → entity                             |
+| `imports`    | File depends on another file in the workspace                     |
+| `dependsOn`  | File depends on an external package                               |
+| `calls`      | Entity invokes another entity, resolved through import bindings    |
+| `extends`    | Class inheritance, or an embedded struct in Go                     |
+| `implements` | TypeScript `implements` clauses                                    |
+| `renders`    | React component renders another component                          |
+
+### Performance
+
+Analysis is per-file and cached by modification time and size, so editing one file re-parses one file. The cache persists into the extension's workspace storage, which makes reopening an unchanged project close to instant. A file watcher invalidates only what changed, debounced so a burst of saves triggers one rebuild.
+
+Large workspaces are indexed up to `warhammer.librarium.maxFiles` (default 2,500) and marked as a partial index; the canvas draws at most the 800 most connected records at any one level. Directories that stay collapsed cost nothing.
+
+```json
+{
+  "warhammer.librarium.maxFiles": 2500
+}
+```
+
+### Faction integration
+
+The Librarium inherits your active theme. Faction accent, glow, and surface tints come from the same palette the Servo-Skull uses, expressed as semantic CSS variables (`--librarium-accent`, `--librarium-surface`, `--librarium-edge`, and friends) rather than sixteen separate stylesheets. Switching to a light faction theme gives you a light Librarium. Switching factions repaints it live.
+
+### Known limitations
+
+- **Go parsing is scanner-based, not a true AST.** There is no mature Go parser for Node, and requiring the Go toolchain would break the zero-setup principle. Comments and string literals are stripped before parsing, so they cannot create phantom records, and brace nesting is tracked rather than guessed — but generics, build tags, and unusual formatting can still be misread.
+- **Call resolution is name-based.** A call edge is drawn when a called name matches an entity in the same file or in a file it imports. It has no type checker behind it, so identically named symbols in unrelated files can occasionally be conflated, and calls through dynamic dispatch are not traced.
+- **Only top-level declarations become entities.** Nested helpers and plain data variables are deliberately excluded to keep the graph readable.
+- **Path aliases are not resolved.** `tsconfig` `paths` and bundler aliases resolve as external packages rather than workspace files.
+- **The first workspace folder is indexed.** Multi-root workspaces show only the first folder.
+- **`.d.ts` files, `node_modules`, build output, and files over 512KB are skipped.**
+
+---
+
 ## Icon Theme
 
-**Warhammer 40k: Grimdark Sigils** — 33 custom file/folder SVG icons covering common languages, config formats, and file types. Enable via `Cmd+Shift+P` → **Preferences: File Icon Theme**.
+**Warhammer 40k: Grimdark Sigils** — 37 custom file/folder SVG icons covering common languages, config formats, and file types. Enable via `Cmd+Shift+P` → **Preferences: File Icon Theme**.
 
 ---
 
@@ -326,6 +453,9 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
 | `Warhammer 40k: Summon the Servo-Skull`       | Trigger an ambient transmission in the sidebar |
 | `Warhammer 40k: Customize Theme (Inject Colour Rites)` | Layer a curated chrome palette on the active theme |
 | `Warhammer 40k: Open the Inquisition Terminal` | Reopen the welcome page                        |
+| `Warhammer 40k: Consult the Librarium`        | Open the project knowledge graph               |
+| `Warhammer 40k: Refresh Librarium`            | Re-index the workspace from scratch            |
+| `Warhammer 40k: Focus Librarium on Current File` | Open the Librarium focused on the active file |
 
 ### Settings
 
@@ -334,12 +464,15 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
   "warhammer.companion.enabled": true,
   "warhammer.companion.notificationsEnabled": true,
   "warhammer.companion.saveReactions": true,
+  "warhammer.companion.customMessages": [],
 
   "warhammer.mascot.enabled": true,
   "warhammer.mascot.faction": "auto",
   "warhammer.mascot.displayDuration": 8,
   "warhammer.mascot.ambientFrequency": "rare",
-  "warhammer.mascot.longSessionThreshold": 2
+  "warhammer.mascot.longSessionThreshold": 2,
+
+  "warhammer.librarium.maxFiles": 2500
 }
 ```
 
@@ -363,6 +496,8 @@ Each faction has a dedicated voice pool for every event — 7 events × 16 facti
 | `ravenGuard`    | Raven Guard — strike from silence               |
 | `alphaLegion`   | Alpha Legion — every plan has a plan            |
 | `custodes`      | Adeptus Custodes — gold-clad imperial certainty |
+
+`companion.customMessages` accepts an array of your own lore lines; they are merged into the ambient and event-driven pools alongside the built-in faction voices.
 
 `ambientFrequency` accepts `"off"`, `"rare"` (every 90–130 min), or `"occasional"` (every 45–75 min).
 
@@ -425,6 +560,10 @@ Enable semantic highlighting for the best experience:
 - [x] Late-night transmission events
 - [x] Purity seal notifications for milestone commits
 - [x] Theme customization and per-key colour tuning
+- [x] Librarium: local project knowledge graph (TypeScript, JavaScript, TSX/JSX, Go)
+- [x] Circular dependency detection and dependency hubs
+- [ ] Librarium: Go analysis via a true AST
+- [ ] Librarium: `tsconfig` path-alias resolution and multi-root workspaces
 - [ ] Sound pack: cogitator hum, servo-skull chirps (opt-in)
 
 ---

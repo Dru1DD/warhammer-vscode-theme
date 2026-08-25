@@ -4,6 +4,7 @@ import { registerCustomizeThemeCommand } from './customize';
 import { detectStack, resolveStackLines } from './stack';
 import { PuritySealTracker } from './milestones';
 import { maybeShowOnboarding, registerOnboardingCommand } from './onboarding';
+import { registerLibrariumCommands } from './librarium/commands';
 
 const TRANSMISSIONS = [
   '"The flesh is weak. The code must be pure." — Servo-Skull 7-Theta',
@@ -61,6 +62,9 @@ export function activate(context: vscode.ExtensionContext) {
   // ── Onboarding (Feature 5) ─────────────────────────────────────────────────
   void maybeShowOnboarding(context);
   registerOnboardingCommand(context);
+
+  // ── Librarium project knowledge graph ──────────────────────────────────────
+  registerLibrariumCommands(context);
 
   // ── Theme customization injector (Feature 1) ───────────────────────────────
   registerCustomizeThemeCommand(context);

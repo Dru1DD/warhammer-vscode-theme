@@ -219,6 +219,7 @@ function buildOnboardingHtml(): string {
         <li><b>Servo-Skull Companion</b> — an animated sentinel in your Explorer sidebar with a faction-matched voice.</li>
         <li><b>Event Transmissions</b> — the skull reacts to builds, commits, long sessions, and the small hours of the night.</li>
         <li><b>Purity Seals</b> — your commits are counted across all sessions. Milestones earn an Imperial commendation.</li>
+        <li><b>The Librarium</b> — a local knowledge graph of your codebase: architecture, file dependencies, entities, dependency hubs and circular-import heresy. No network, no accounts.</li>
       </ul>
 
       <h2>Sanctioned Commands</h2>
@@ -227,6 +228,7 @@ function buildOnboardingHtml(): string {
         <tr><td class="k">Warhammer 40k: Summon the Servo-Skull</td><td class="d">Trigger an ambient transmission in the sidebar.</td></tr>
         <tr><td class="k">Warhammer 40k: Consult the Servo-Skull</td><td class="d">Request an immediate reading from 7-Theta.</td></tr>
         <tr><td class="k">Warhammer 40k: Toggle Servo-Skull Companion</td><td class="d">Silence or rouse the status-bar sentinel.</td></tr>
+        <tr><td class="k">Warhammer 40k: Consult the Librarium</td><td class="d">Open the project knowledge graph for this workspace.</td></tr>
       </table>
 
       <div class="note">

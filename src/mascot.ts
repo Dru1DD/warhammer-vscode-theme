@@ -34,12 +34,12 @@ export type TriggerEvent =
   | 'ambient'
   | 'lateNight';
 
-interface FactionPalette {
+export interface FactionPalette {
   accent: string; accentDim: string; gold: string; goldDim: string;
   glowRgb: string; bgBase: string; bgTint: string; tag: string;
 }
 
-const FACTION_PALETTE: Record<Faction, FactionPalette> = {
+export const FACTION_PALETTE: Record<Faction, FactionPalette> = {
   bloodAngels:  { accent: '#c41e3a', accentDim: '#8b0000', gold: '#c9a84c', goldDim: '#7a6530', glowRgb: '196,30,58',  bgBase: '#0d0809', bgTint: '#120608', tag: 'BLOOD ANGELS'       },
   deathwatch:   { accent: '#4a6080', accentDim: '#2c3e50', gold: '#718096', goldDim: '#4a5568', glowRgb: '74,96,128',  bgBase: '#080a0d', bgTint: '#090c10', tag: 'DEATHWATCH'          },
   necrons:      { accent: '#3a8a5a', accentDim: '#1e5038', gold: '#4a9a78', goldDim: '#2a6848', glowRgb: '58,138,90',  bgBase: '#080b09', bgTint: '#090d0a', tag: 'NECRONS'             },
@@ -998,7 +998,7 @@ const PER_EVENT_COOLDOWN_MS: Record<TriggerEvent, number> = {
 const GLOBAL_COOLDOWN_MS = 75_000;
 const MAX_QUEUE = 2;
 
-function getFactionFromThemeName(themeName: string): Faction {
+export function getFactionFromThemeName(themeName: string): Faction {
   const t = themeName.toLowerCase();
   if (t.includes('blood angels'))    return 'bloodAngels';
   if (t.includes('deathwatch'))      return 'deathwatch';

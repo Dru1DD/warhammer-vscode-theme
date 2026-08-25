@@ -6,8 +6,16 @@ scripts/**
 .eslintrc.json
 **/*.map
 **/*.ts
-!out/**
 node_modules/**
 tsconfig.json
 webpack.config.js
-out/**/*.test.js
+**/*.test.js
+fixtures/**
+.claude/**
+.serena/**
+*.vsix
+
+# The Librarium parses TypeScript with the real compiler API, so the parser must
+# ship. Only the single-file build is included, not the whole package.
+!node_modules/typescript/lib/typescript.js
+!node_modules/typescript/package.json
