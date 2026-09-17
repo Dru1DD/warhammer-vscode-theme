@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.0
+
+### Added
+
+- **Vibrancy toggle** (`Warhammer 40k: Toggle Vibrancy`) — makes the active faction's editor, tabs, sidebar, activity bar, panel, terminal, title bar and status bar backgrounds translucent (theme-scoped `workbench.colorCustomizations`) and drives the [Vibrancy Continued](https://marketplace.visualstudio.com/items?itemName=illixion.vscode-vibrancy-continued) extension for the blur, offering to install it when missing. Running it again removes only the colours it wrote.
+- **New setting** — `warhammer.vibrancy.opacity` (default 0.7, range 0–1); changes re-tint the active theme immediately while vibrancy is on
+- **Two new colour-tuning targets** in the Servo-Skull sidebar — **Status Bar Icons** (`statusBar.foreground`) and **Sidebar & Panel Icons** (`icon.foreground`)
+
+### Changed
+
+- `npm test` also runs the vibrancy self-check
+
+---
+
 ## 0.7.0
 
 ### Added

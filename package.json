@@ -2,7 +2,7 @@
   "name": "warhammer-40k-theme",
   "displayName": "Warhammer 40k: Grimdark Elite",
   "description": "Premium faction themes for Warhammer 40k devotees, with the Librarium project knowledge graph. Sixteen dark, mid-dark, and light environments for long coding sessions.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "publisher": "Dru1DD",
   "engines": {
     "vscode": "^1.85.0"
@@ -176,6 +176,11 @@
         "category": "Warhammer 40k"
       },
       {
+        "command": "warhammer.vibrancy.toggle",
+        "title": "Warhammer 40k: Toggle Vibrancy",
+        "category": "Warhammer 40k"
+      },
+      {
         "command": "warhammer.showWelcome",
         "title": "Warhammer 40k: Open the Inquisition Terminal",
         "category": "Warhammer 40k"
@@ -305,6 +310,13 @@
           "minimum": 100,
           "maximum": 20000,
           "description": "Maximum number of source files the Librarium indexes in one pass. Larger workspaces are indexed up to this cap and marked as a partial index."
+        },
+        "warhammer.vibrancy.opacity": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Opacity of editor and sidebar backgrounds when Toggle Vibrancy is on (0 = fully transparent, 1 = opaque). Lower values let more blur through but reduce text contrast."
         }
       }
     },
@@ -339,7 +351,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "package": "vsce package",
-    "test": "npm run compile && node out/librarium/librarium.test.js && node out/customize.test.js"
+    "test": "npm run compile && node out/librarium/librarium.test.js && node out/customize.test.js && node out/vibrancy.test.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.85.0",

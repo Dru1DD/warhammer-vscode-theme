@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { MascotViewProvider } from './mascot';
 import { registerCustomizeThemeCommand } from './customize';
+import { registerVibrancyCommand } from './vibrancy';
 import { detectStack, resolveStackLines } from './stack';
 import { PuritySealTracker } from './milestones';
 import { maybeShowOnboarding, registerOnboardingCommand } from './onboarding';
@@ -68,6 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // ── Theme customization injector (Feature 1) ───────────────────────────────
   registerCustomizeThemeCommand(context);
+  registerVibrancyCommand(context);
 
   // ── Purity-seal milestone tracker (Feature 4) ──────────────────────────────
   const seals = new PuritySealTracker(context);

@@ -20,7 +20,7 @@ npm install
 npm run package
 
 # 2. Install into VS Code
-code --install-extension warhammer-40k-theme-0.7.0.vsix
+code --install-extension warhammer-40k-theme-0.8.0.vsix
 ```
 
 Or install via the VS Code UI:
@@ -28,7 +28,7 @@ Or install via the VS Code UI:
 1. Open VS Code
 2. `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux)
 3. Run **Extensions: Install from VSIX...**
-4. Select `warhammer-40k-theme-0.7.0.vsix`
+4. Select `warhammer-40k-theme-0.8.0.vsix`
 5. Reload VS Code when prompted
 
 ### Apply a theme
@@ -396,7 +396,28 @@ The Librarium inherits your active theme. Faction accent, glow, and surface tint
 
 `Warhammer 40k: Customize Theme (Inject Colour Rites)` layers a curated, faction-neutral palette (title bar, activity bar, status bar, cursor, terminal ANSI colors) on top of whichever theme is active. Existing `workbench.colorCustomizations` keys are preserved — only the managed keys are written.
 
-For finer control, the Servo-Skull sidebar view offers **per-key colour tuning**: pick a target (comments, cursor, active line number, activity bar icons, status bar background, selection) and a swatch or custom hex. Overrides are written theme-scoped, so a tweak sticks to the faction it was made under.
+For finer control, the Servo-Skull sidebar view offers **per-key colour tuning**: pick a target (comments, cursor, active line number, activity bar icons, status bar background, status bar icons, sidebar & panel icons, selection) and a swatch or custom hex. Overrides are written theme-scoped, so a tweak sticks to the faction it was made under.
+
+- **Status Bar Icons** sets `statusBar.foreground` — VS Code colours status-bar icons and text with the same key.
+- **Sidebar & Panel Icons** sets `icon.foreground` — toolbar buttons and tree chevrons in the sidebar and bottom panel.
+- File-type icons in the Explorer come from the icon theme's SVGs and are not affected by colour settings.
+
+### Vibrancy
+
+`Warhammer 40k: Toggle Vibrancy` makes the active faction's editor, tabs, sidebar, activity bar, panel, terminal, title bar and status bar backgrounds translucent, so a blurred desktop shows through.
+
+VS Code has no API for window transparency, so the blur itself comes from the [Vibrancy Continued](https://marketplace.visualstudio.com/items?itemName=illixion.vscode-vibrancy-continued) extension. The command offers to install it and then runs its **Enable Vibrancy** step. Running the command again removes the translucent colours and disables Vibrancy Continued.
+
+```jsonc
+{
+  // 0 = fully transparent, 1 = opaque. Changes apply immediately while vibrancy is on.
+  "warhammer.vibrancy.opacity": 0.7
+}
+```
+
+- Works only under a Warhammer 40k faction theme; colours are written theme-scoped.
+- Vibrancy Continued patches VS Code's own files: VS Code will report the installation as corrupt, and the patch must be re-applied after each VS Code update. Linux is not supported by it.
+- Disabling removes only colours that still match the theme, so manual tweaks survive; it disables the blur for every theme.
 
 ---
 

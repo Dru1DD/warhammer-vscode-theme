@@ -105,6 +105,10 @@ export const TUNABLE_TARGETS: readonly TunableTarget[] = [
   { id: 'lineNum',   label: 'Active Line Number',  key: 'editorLineNumber.activeForeground',  kind: 'color', paletteKey: 'gold'    },
   { id: 'actIcon',   label: 'Activity Bar Icons',  key: 'activityBar.foreground',            kind: 'color', paletteKey: 'gold'    },
   { id: 'statusBg',  label: 'Status Bar Background', key: 'statusBar.background',            kind: 'color', paletteKey: 'bgBase'  },
+  // VS Code colours status-bar icons and text with one key; they can't be split.
+  { id: 'statusFg',  label: 'Status Bar Icons',    key: 'statusBar.foreground',              kind: 'color', paletteKey: 'gold'    },
+  // Toolbar/tree icons in the sidebar and bottom panel. File-type icons come from the icon theme SVGs.
+  { id: 'viewIcons', label: 'Sidebar & Panel Icons', key: 'icon.foreground',                 kind: 'color', paletteKey: 'gold'    },
   { id: 'selection', label: 'Selection',           key: 'selection.background',              kind: 'color', alpha: '55', paletteKey: 'accent' },
 ];
 
